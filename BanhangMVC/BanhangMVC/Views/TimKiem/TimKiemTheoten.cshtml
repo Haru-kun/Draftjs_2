@@ -23,24 +23,6 @@
 
 </script>
 
-<div style="margin-bottom:30px">
-    @*Tim kiem ajax*@
-    <div style="float:left;">
-        @using (Ajax.BeginForm("TimKiemPartial", "TimKiem", new AjaxOptions { UpdateTargetId = "timkiemajax", InsertionMode = InsertionMode.Replace }))
-        {   
-            <input type="text" class="txt_timkiem" value="" name="tukhoa" placeholder=" Tên sản phẩm bất kỳ..." style="border-radius:5px;width:570px;" />
-            <input type="submit" value="Tim kiem" style="padding:1px;" />
-        }
-    </div>
-    
-    <div>
-        <select id="xemtheo" onchange="xemtheo()" style="border-radius: 5px;">
-            <option value="1">San Pham Moi Nhat</option>
-            <option value="2">Gia Giam Dan</option>
-            <option value="3">Gia Tang Dan</option>
-        </select>
-    </div>    
-</div>
 
 
 <script>
