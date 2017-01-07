@@ -1,0 +1,82 @@
+﻿@using BanhangMVC.Models.View
+@model GioHang 
+
+@{
+    ViewBag.Title = "SuaGioHang";
+    Layout = "~/Views/Layout/GioHangLayout.cshtml";
+
+    List<GioHang> listGH = ViewBag.GioHang as List<GioHang>;
+}
+
+<h1>Chỉnh sửa giỏ hàng</h1>
+<div class="col-md-9 cart-items">
+    @foreach (var item in listGH)
+    {
+        if (Model.MaSP == item.MaSP)
+        {
+            <form method="post" action="@Url.Action("CapNhatGioHang","GioHang")" style="margin-bottom: 50px; padding-bottom: 20px; padding-top:20px; border-bottom: 1px solid #ff5757;border-top:1px solid #ff5757;">
+                <div class="cart-header">
+                    <div class="@item.MaSP"> </div>
+                    <div class="cart-sec simpleCart_shelfItem">
+                        <div class="cart-item cyc">
+                            <img src="@Url.Content("~/Content/HinhanhSP/" + item.HinhAnh)" class="img-responsive" alt="" />
+                        </div>
+                        <div class="cart-item-info">
+                            <h3><a href="#">@item.TenSP</a><span>Mã sản phẩm: @item.MaSP @Html.Hidden("MaSP",item.MaSP) </span></h3>
+                            <ul class="qty">
+                                <li><p>Đơn giá : @item.Dongia.ToString("#,## VND")</p></li>
+                                <li><p>Số lượng : <input type="text" id="soluong" name="Soluong" /></p></li>
+                                <li></li>
+                                <li><p id="thongbao_soluong"  style="color:orangered"></p></li>
+                            </ul>
+                            <div class="delivery">
+                                <p>Thành tiền : @item.ThanhTien.ToString("#,## VND")</p>
+                                <span>Giao hàng trong 2 - 3 ngày </span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div><input type="submit" value="Cập nhật giỏ hàng" id="capnhat"  style="width: 270px;background:#ff5f13;"/></div>
+            </form>
+            <hr style="color: #ff5f13; border-width:5px" />
+        }
+        else
+        {
+            <div class="cart-header">
+                <div id="@item.MaSP" class="close1"></div>
+                <div class="cart-sec simpleCart_shelfItem">
+                    <div class="cart-item cyc">
+                        <img src="@Url.Content("~/Content/HinhanhSP/" + item.HinhAnh)" class="img-responsive" alt="" />
+                    </div>
+                    <div class="cart-item-info">
+                        <h3><a href="#">@item.TenSP</a><span>Mã sản phẩm: @item.MaSP</span></h3>
+                        <ul class="qty">
+                            <li><p>Đơn giá : @item.Dongia.ToString("#,## VND")</p></li>
+                            <li><p>Số lượng : @item.Soluong</p></li>
+                        </ul>
+                        <div class="delivery">
+                            <p>Thành tiền : @item.ThanhTien.ToString("#,## VND")</p>
+                            <span><a href="@Url.Action("SuaGioHang","GioHang",new {@masp=item.MaSP})">Chỉnh sửa sản phẩm</a></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+@* Kiem tra so luong*@
+<script>
+    $("#capnhat").click(function () {
+        var soluong = $("#soluong").val();
+        if(isNaN(soluong)==true || soluong<=0)
+        {
+            $("#thongbao_soluong").text("Số lượng không hợp lệ !!!");
+            return false;
+        }
+    });
+</script>

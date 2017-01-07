@@ -1,0 +1,40 @@
+﻿
+
+@{
+    ViewBag.Title = "XemGioHang1";
+    Layout = "~/Views/Layout/GioHangLayout.cshtml";
+}
+
+
+<h2>XemGioHang</h2>
+@if (Model == null)
+{
+    <h1 style="align-content:center; color:darkorange">Chưa có sản phẩm nào trong giỏ hàng</h1>
+}
+else
+{
+    @*<table>
+            <tr>
+                <td>Ma Sp</td>
+                <td>Ten Sp</td>
+                <td>Hinh Anh</td>
+                <td>So luong</td>
+                <td>Don Gia</td>
+                <td>Thanh Tien</td>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.MaSP</td>
+                    <td>@item.TenSP</td>
+                    <td><img src="@Url.Content("~/Content/HinhanhSP/"+item.HinhAnh)"/></td>
+                    <td>@item.Soluong</td>
+                    <td>@item.Dongia.ToString("#,## VND")</td>
+                    <td>@item.ThanhTien.ToString("#,## VND")</td>
+
+                </tr>
+            }
+
+        </table>*@
+
+}
