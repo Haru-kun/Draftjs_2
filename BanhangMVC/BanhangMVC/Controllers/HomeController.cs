@@ -24,7 +24,7 @@ namespace BanhangMVC.Controllers
             ViewBag.lstMTBM = listMTBM;
             return View();
         }
-
+// thuy hong cap nhat
         public ActionResult MenuPartial()
         {
             var listSP = db.SanPhams;
