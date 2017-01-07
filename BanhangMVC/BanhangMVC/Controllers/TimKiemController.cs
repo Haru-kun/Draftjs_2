@@ -64,30 +64,7 @@ namespace BanhangMVC.Controllers
             return PartialView(lstSP);
         }
 
-        [HttpPost]
-        public ActionResult XemTheo(int? Loai)
-        {
-            var lstSP = db.SanPhams.OrderByDescending(x=>x.NgayCapNhat);
-
-            switch (Loai)
-            {
-                case 2:
-                    {
-                        lstSP = db.SanPhams.OrderByDescending(x=>x.DonGia);
-                    }break;
-                case 3:
-                    {
-                        lstSP = db.SanPhams.OrderBy(x => x.DonGia);
-                    }
-                    break;
-                default:
-                    {
-                        lstSP = db.SanPhams.OrderByDescending(x => x.NgayCapNhat);
-                    }break;
-            }
-
-            return PartialView(lstSP);
-        }
+       
 
         // Giải phóng bộ nhớ khi không sử dụng
         protected override void Dispose(bool disposing)
