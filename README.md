@@ -7,8 +7,8 @@
 
  ```````````
 giải nén file packages.zip extract here
-vô BanHangMVC
-giải nén Bin.zip , App_Data.zip,obj.zip giải nén ra extract here
+Trong BanHangMVC
+giải nén Bin.zip, App_Data.zip, obj.zip giải nén ra extract here
 
 ``````````````
 ------------------------------------------------------------------
