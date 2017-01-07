@@ -60,6 +60,37 @@
         $("#timkiemajax").attr("href", result);
     });*@
 
+</script>
+
+    <div id="timkiemajax">
+           <div class="col-md-9 product1">
+            <div class="bottom-product">
+                @foreach (var item in Model.OrderBy(x => x.DonGia))
+                {
+                    <div class="col-md-4 bottom-cd simpleCart_shelfItem">
+                        <div class="product-at ">
+                            <a href="@Url.Action("ChitietSanpham","Sanpham",new {@id=item.MaSP,@tensp=item.TenSP})">
+                                <img class="img-responsive" src="@Url.Content("~/Content/HinhanhSP/" + item.HinhAnh)" alt="" style="width:200px; height:200px; padding:20px;">
+                                <div class="pro-grid">
+                                    <span class="buy-in">Xem Chi tiết</span>
+                                </div>
+                            </a>
+                        </div>
+                        <p class="tun">@item.TenSP</p>
+
+                        <div id="item_add_ajax">
+                            <i> </i>@Ajax.ActionLink(String.Format("{0:0,0 vnđ}", item.DonGia), "ThemGioHangAjax", "GioHang", new { @masp = item.MaSP, @url = Request.Url.ToString() }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "divgiohang", InsertionMode = InsertionMode.Replace }, new { @style = ("text-decoration: none;cursor: pointer;color: white;") })
+                        </div>
+                    </div>
+                    }
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+        <div class="dlink">
+            @*Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount*@
+            @Html.PagedListPager(Model, page => Url.Action("TimKiemTheoten", new { @page = page, @tukhoa = ViewBag.TK }))
+        </div>
+</div>
 
 <div class="popup_login">
     <div class="login-form">
