@@ -15,13 +15,14 @@ namespace BanhangMVC.Controllers
         [HttpGet]
         public ActionResult TimKiemTheoten(string tukhoa,int? page)
         {
+			int soluongsanpham = 9;
+            int tranghientai = (page ?? 1); // neu page k co gia tri thi normal la 1
+			
             if (Request.HttpMethod != "GET")
             {
                 page = 1;
             }
 
-            int soluongsanpham = 9;
-            int tranghientai = (page ?? 1); // neu page k co gia tri thi normal la 1
 
             //tim kiem theo ten san pham
             var lstSP = db.SanPhams.Where(x => x.TenSP.Contains(tukhoa)); // contain la tim kiem theo tu khoa, chi can giong tu khoa thi tra ve
