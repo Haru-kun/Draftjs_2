@@ -45,6 +45,22 @@
 
 
 
+<script>
+
+    @*function loctimkiem() {
+        //var vitri = document.getElementById("xemtheo").selectedIndex;
+        //var chude = document.getElementById("xemtheo").options;
+        var result='@Ajax.ActionLink("TimKiemPartial", "TimKiem",new {@tukhoa="laptop" }, new AjaxOptions { UpdateTargetId = "timkiemajax", InsertionMode = InsertionMode.Replace }))';
+        return result;
+    }*@
+
+    @*$("#xemtheo").change(function () {
+        var title = $("#xemtheo").val();
+        var result = '@Url.Action("TimKiemPartial", "TimKiem", new { @tukhoa = "laptop"})';
+        $("#timkiemajax").attr("href", result);
+    });*@
+
+</script>
 
     <div id="timkiemajax">
            <div class="col-md-9 product1">
