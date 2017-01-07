@@ -1,0 +1,57 @@
+﻿@using BanhangMVC.Models;
+@model IEnumerable<SanPham>
+
+
+<ul class="menu">
+    @foreach (var groupItem in Model.GroupBy(x => x.LoaiSanPham))
+    {
+        if (groupItem.Key != null)
+        {
+        <li class="item1">
+            <a href="@Url.Action("TimKiemTheoten","TimKiem",new {@tukhoa=groupItem.Key.TenLoai })">@groupItem.Key.TenLoai </a>
+            <ul class="cute">
+            @foreach (var item in groupItem.GroupBy(x => x.NhaSanXuat))
+            {
+                if (item.Key != null)
+                {
+                        <li class="subitem1"><a href="@Url.Action("DanhsachSanpham","Sanpham",new { MaLoaiSp =groupItem.Key.MaLoaiSP, MaNSX =item.Key.MaNSX})">@item.Key.TenNSX</a></li>
+                }
+            }
+            </ul>
+        </li>
+        }
+    }
+    @*<li class="item2">
+        <a href="#">Women </a>
+        <ul class="cute">
+            <li class="subitem1"><a href="#">Cute Kittens </a></li>
+            <li class="subitem2"><a href="#">Strange Stuff </a></li>
+            <li class="subitem3"><a href="#">Automatic Fails </a></li>
+        </ul>
+    </li>
+    <li class="item3">
+        <a href="#">Kids</a>
+        <ul class="cute">
+            <li class="subitem1"><a href="#">Cute Kittens </a></li>
+            <li class="subitem2"><a href="#">Strange Stuff </a></li>
+            <li class="subitem3"><a href="#">Automatic Fails</a></li>
+        </ul>
+    </li>
+    <li class="item4">
+        <a href="#">Accesories</a>
+        <ul class="cute">
+            <li class="subitem1"><a href="#">Cute Kittens </a></li>
+            <li class="subitem2"><a href="#">Strange Stuff </a></li>
+            <li class="subitem3"><a href="#">Automatic Fails</a></li>
+        </ul>
+    </li>
+
+    <li class="item4">
+        <a href="#">Shoes</a>
+        <ul class="cute">
+            <li class="subitem1"><a href="#">Cute Kittens </a></li>
+            <li class="subitem2"><a href="#">Strange Stuff </a></li>
+            <li class="subitem3"><a href="product.html">Automatic Fails </a></li>
+        </ul>
+    </li>*@
+</ul>

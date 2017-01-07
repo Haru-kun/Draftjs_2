@@ -1,0 +1,49 @@
+﻿@using BanhangMVC.Models;
+@model IEnumerable<SanPham>
+
+<div class="product-bottom">
+    <div class="of-left-in">
+        <h3 class="best">Xem Nhiều Nhất</h3>
+    </div>
+    @foreach (var item in Model.Take(3))
+    {
+        <div class="product-go">
+            <div class="fashion-grid">
+                <a href="@Url.Action("ChitietSanpham","Sanpham",new {@id=item.MaSP,@tensp=item.TenSP})"><img class="img-responsive " src="@Url.Content("~/Content/HinhanhSP/"+item.HinhAnh)" alt="@item.TenSP"></a>
+
+            </div>
+            <div class=" fashion-grid1">
+                <h6 class="best2">
+                    <a href="@Url.Action("ChitietSanpham","Sanpham",new {@id=item.MaSP,@tensp=item.TenSP})">
+                        @item.TenSP
+                    </a>
+                </h6>
+
+                <span class="price-in1">@String.Format("{0:0,0}", item.DonGia)</span>
+            </div>
+
+            <div class="clearfix"> </div>
+        </div>
+    }
+        
+    
+    @*<div class="product-go">
+        <div class=" fashion-grid">
+            <a href="#"><img class="img-responsive " src="~/Content/images/p2.jpg" alt=""></a>
+
+        </div>
+        <div class="fashion-grid1">
+            <h6 class="best2">
+                <a href="#">
+                    Lorem ipsum dolor sit
+                    amet consectetuer
+                </a>
+            </h6>
+
+            <span class=" price-in1"> $40.00</span>
+        </div>
+
+        <div class="clearfix"> </div>
+    </div>*@
+
+</div>
