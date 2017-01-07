@@ -6,9 +6,10 @@
 #Hướng dẫn sử dụng
 
  ```````````
- $git clone git@github.com:Haru-kun/Draftjs.git
- $cd Draftjs
- $npm install
+giải nén file packages.zip extract here
+vô BanHangMVC
+giải nén Bin.zip , App_Data.zip,obj.zip giải nén ra extract here
+
 ``````````````
 ------------------------------------------------------------------
 #Yêu cầu
