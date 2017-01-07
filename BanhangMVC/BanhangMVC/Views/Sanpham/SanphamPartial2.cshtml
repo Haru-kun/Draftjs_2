@@ -1,0 +1,33 @@
+﻿@using BanhangMVC.Models;
+@model IEnumerable<SanPham>
+
+<h1 style="padding-top:0.5em"><span style="color:#ef5f21;font-size: 35px;">LapTop<hr style="width:70%;color:black;border: solid 1px #ef5f21;" /></span></h1>
+<div class="grid-in">
+    @foreach (var item in Model.Take(6))
+    {
+        String cauhinh = item.CauHinh;
+        String[] chuoi = cauhinh.Split(';');
+        //<td><img src="@Url.Content("~/Content/HinhanhSP/"+item.HinhAnh)"</td>
+        <div class="col-md-4 grid-top">
+            <a href="@Url.Action("ChitietSanpham","Sanpham",new {@id=item.MaSP,@tensp=item.TenSP})" class="b-link-stripe b-animate-go  thickbox">
+                @*<a href="single.html" class="b-link-stripe b-animate-go  thickbox">*@
+                    <img class="img-responsive" src="@Url.Content("~/Content/HinhanhSP/"+item.HinhAnh)" alt=""  style="width: 280px;height:280px;padding:30px;">
+                    <div class="b-wrapper">
+                        <h3 class="b-animate b-from-left    b-delay03 ">
+                            <span>CPU: @chuoi[0]</span>
+                            <span>RAM: @chuoi[1]</span>
+                            <span>Đĩa cứng: @chuoi[2]</span>
+                            <span>Màn hình rộng: @chuoi[3]</span>
+                            <span>Cảm ứng: @chuoi[4]</span>
+                            <span>Đồ họa: @chuoi[5]</span>
+                            <span>Đĩa quang: @chuoi[6]</span>
+                            <span>>>></span>
+                        </h3>
+                    </div>
+                </a>
+                <p><a href="single.html">@item.TenSP</a></p>
+</div>
+    }
+    <div class="clearfix"> </div>
+</div>
+<div style="text-align:right; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;font-size:25px;padding: 20px;margin-top: 5px;"><a href="@Url.Action("TimKiemTheoten", "TimKiem", new { @tukhoa = "Máy Tính Bảng" })" style="color: rgb(239, 95, 33);">Xêm thêm >>></a></div>
