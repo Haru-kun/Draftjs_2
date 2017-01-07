@@ -80,7 +80,14 @@ namespace BanhangMVC.Controllers
             return RedirectToAction("TimKiemTheoten", new { @tukhoa = tukhoa });
         }
 
-       
+        public ActionResult TimKiemPartial(string tukhoa)
+        {
+
+            //tim kiem theo ten san pham
+            var lstSP = db.SanPhams.Where(x => x.TenSP.Contains(tukhoa)); // contain la tim kiem theo tu khoa, chi can giong tu khoa thi tra ve
+            ViewBag.TK = tukhoa;
+            return PartialView(lstSP);
+        }
 
 
         // Giải phóng bộ nhớ khi không sử dụng
