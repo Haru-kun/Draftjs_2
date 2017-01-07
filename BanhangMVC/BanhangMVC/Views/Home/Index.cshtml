@@ -1,0 +1,20 @@
+﻿@using BanhangMVC.Models;
+@model IEnumerable<SanPham>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/HomeLayout.cshtml";
+}
+@{
+    IEnumerable<SanPham> listDTM = (IEnumerable<SanPham>)ViewBag.lstDTM;
+    IEnumerable<SanPham> listLTM = ViewBag.lstLTM as IEnumerable<SanPham>;
+    IEnumerable<SanPham> listMTBM = ViewBag.lstMTBM as IEnumerable<SanPham>;
+}
+<div class="container">
+    <div class="content-top">
+            @Html.Partial("~/Views/Sanpham/SanphamPartial1.cshtml", listDTM)
+            @Html.Partial("~/Views/Sanpham/SanphamPartial2.cshtml", listLTM)
+            @Html.Partial("~/Views/Sanpham/SanphamPartial3.cshtml", listMTBM)
+    </div>
+</div>
+sss
