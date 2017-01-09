@@ -92,25 +92,6 @@
         </div>
 </div>
 
-<div class="popup_login">
-    <div class="login-form">
-        <div style="width:100%;"><div id="btn_close" style="width: 20px;float: right" class="btn-danger">X</div></div>
-        <h2>Đăng Nhập</h2>
-        <div class="form-info">
-            @using (Ajax.BeginForm("XulyDangnhap", "DangNhap", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "thongbao" }))
-            {
-                <input type="text" name="user" id="user" class="email" placeholder="Tên tài khoản" required="" />
-                <input type="password" name="pass" id="pass" class="password" placeholder="Mật khẩu" required="" />
-                <h3 id="thongbao" style="color:orangered;margin-top:10px;"></h3>
-                <p><a href="#">Quên mật khẩu?</a></p>
-                <ul class="login-buttons">
-                    <li><input type="submit" id="btn_login" value="LOGIN" /></li>
-                    <li><a href="#" class="hvr-sweep-to-left">Đăng Ký</a></li>
-                </ul>
-            }
-        </div>
-    </div>
-</div>
 
 <script>
     $("#xem_truoc").click(function () {
