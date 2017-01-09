@@ -32,7 +32,14 @@ namespace BanhangMVC.Controllers
             {
                 lstSP = db.SanPhams.Where(x => x.MaLoaiSP == 3);
             }
-            
+            if (tukhoa == "Laptop")
+            {
+                lstSP = db.SanPhams.Where(x => x.MaLoaiSP == 2);
+            }
+            if (tukhoa == "Điện Thoại")
+            {
+                lstSP = db.SanPhams.Where(x => x.MaLoaiSP == 1);
+            }
             if (tukhoa == null)
             {
                 var lstSP1 = db.SanPhams;
