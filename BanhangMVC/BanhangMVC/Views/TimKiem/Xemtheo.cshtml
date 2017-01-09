@@ -65,3 +65,16 @@
     }
 </style>
 
+@* hiển thị sản phảm khi chọn trang khác*@
+<script>
+    $('.linktrang').click(function () {
+        $('.simpleCart_shelfItem').hide();
+        //lay so trang tu the a linktrang
+        var sotrang = $(this).attr("data-sotrang");
+
+        //hien thi san pham trong trang tuong ung
+
+        $("." + sotrang).show();
+        //alert(sotrang);
+    });
+</script>
