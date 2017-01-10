@@ -1,0 +1,76 @@
+@using BanhangMVC.Models;
+@{
+    string url = Request.Url.AbsolutePath;
+}
+<link href="~/Content/css/login_style.css" rel='stylesheet' type='text/css' media="all" />
+
+<div class="header-top">
+    <div class="container">
+        <div class="search" style="width: 350px;border-radius: 5px;">
+            @*chuc nang tim kiem*@
+            <form method="post" action="@Url.Action("LayTuKhoa","TimKiem")" style="height: 27px;">
+                <input type="text" id="txt_search" value="" placeholder="Nh?p t? khóa b?n mu?n tìm..." name="tukhoa" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" style="">
+                <input type="submit" id="tk_search" value="Search">
+            </form>
+        </div>
+        <div class="header-left">
+            <ul>
+                @if (Session["taikhoan"] != null)
+                {
+                    ThanhVien tv = (ThanhVien)Session["taikhoan"];
+                    <li><a><span style="color:orangered;font-size:20px;">@tv.TaiKhoan</span></a></li>
+                    <li><a href="@Url.Action("XulyDangxuat","DangNhap")">Ðang Xu?t</a></li>
+                }
+                else
+                {
+                    <li><a id="btn_dangnhap" href="#">Ðang Nh?p</a></li>
+                    <li><a id="btn_dangky" href="@Url.Action("Dangky1","Dangky")">Ðang Ký</a></li>
+                }
+            </ul>
+            @*<div class="cart box_1">
+                <a href="checkout.html">
+                    <h3>
+                        <div class="total">
+                            <span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)
+                        </div>
+                        <img src="~/Content/images/cart.png" alt="" />
+                    </h3>
+                </a>
+                <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
+            </div>*@
+            @Html.Action("GioHangPartial", "GioHang")
+            <div class="clearfix"> </div>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+<div class="popup_login">
+    <div class="login-form">
+        <div style="width:100%;"><div id="btn_close" style="width: 20px;float: right" class="btn-danger">X</div></div>
+        <h2>Ðang Nh?p</h2>
+        <div class="form-info">
+        @using (Ajax.BeginForm("XulyDangnhap", "DangNhap", new AjaxOptions { InsertionMode = InsertionMode.InsertAfter, UpdateTargetId = "thongbao" }))
+        {
+            @Html.Hidden("url", url);
+             <input type="text" name="user" id="user" class="email" placeholder="Tên tài kho?n" required="" />
+                <input type="password" name="pass" id="pass" class="password" placeholder="M?t kh?u" required="" />
+                <h3 id="thongbao" style="color:orangered;margin-top:10px;"></h3>
+                <p><a href="#">Quên m?t kh?u?</a></p>
+                <ul class="login-buttons">
+                    <li><input type="submit" id="btn_login" value="LOGIN" /></li>
+                    <li><a href="#" class="hvr-sweep-to-left">Ðang Ký</a></li>
+                </ul>
+        }
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $("#btn_dangnhap").click(function () {
+        $(".popup_login").slideDown();
+    });
+    $("#btn_close").click(function () {
+        $(".popup_login").slideUp();
+    });    
+</script>
