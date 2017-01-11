@@ -1,0 +1,465 @@
+﻿<!--A Design by W3layouts
+Author: W3layout
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>New Store A Ecommerce Category Flat Bootstarp Resposive Website Template | Signle :: w3layouts</title>
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="~/Content/js/jquery.min.js"></script>
+    <!-- Custom Theme files -->
+    <!--theme-style-->
+    <link href="~/Content/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <!--//theme-style-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="New Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!--fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'><!--//fonts-->
+    <!-- start menu -->
+    <link href="~/Content/css/memenu.css" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" src="~/Content/js/memenu.js"></script>
+    <script>$(document).ready(function(){$(".memenu").memenu();});</script>
+
+
+    <script src="~/Content/js/main.js"></script>
+    <script src="~/Content/js/simpleCart.min.js"> </script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+</head>
+<body>
+    <!--header-->
+    <div class="header">
+        <div class="header-top">
+            @Html.Action("DangnhapPartial", "DangNhap")
+        </div>
+        <div class="container">
+            <div class="head-top">
+                <div class="logo">
+                    <a href="index.html"><img src="~/Content/images/logo.png" alt=""></a>
+                </div>
+                @Html.Action("MenuPartial", "Home")
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!--content-->
+    <!---->
+    <div class="product">
+        <div class="container">
+            <div class="col-md-3 product-price">
+                <div class=" rsidebar span_1_of_left">
+                    <div class="of-left">
+                        <h3 class="cate">Danh Mục</h3>
+                    </div>
+                    @Html.Action("MenuPartialLeft", "Sanpham")
+                </div>
+                <!--initiate accordion-->
+                <script type="text/javascript">
+			$(function() {
+			    var menu_ul = $('.menu > li > ul'),
+			           menu_a  = $('.menu > li > a');
+			    menu_ul.hide();
+			    menu_a.click(function(e) {
+			        e.preventDefault();
+			        if(!$(this).hasClass('active')) {
+			            menu_a.removeClass('active');
+			            menu_ul.filter(':visible').slideUp('normal');
+			            $(this).addClass('active').next().stop(true,true).slideDown('normal');
+			        } else {
+			            $(this).removeClass('active');
+			            $(this).next().stop(true,true).slideUp('normal');
+			        }
+			    });
+
+			});
+                </script>
+                <!---->
+                <div class="product-middle">
+
+                    <div class="fit-top">
+                        <h6 class="shop-top">Lorem Ipsum</h6>
+                        <a href="#" class="shop-now">SHOP NOW</a>
+                        <div class="clearfix"> </div>
+                    </div>
+                </div>
+                @*<div class="sellers">
+                    <div class="of-left-in">
+                        <h3 class="tag">Tags</h3>
+                    </div>
+                    <div class="tags">
+                        <ul>
+                            <li><a href="#">Iphone 6s plus</a></li>
+                            <li><a href="#">Note 7</a></li>
+                            <li><a href="#">Maccbook Air</a></li>
+                            <li><a href="#">dress</a></li>
+                            <li><a href="#">design</a></li>
+                            <li><a href="#">dress</a></li>
+                            <li><a href="#">design</a></li>
+                            <li><a href="#">fashion</a></li>
+                            <li><a href="#">lorem</a></li>
+                            <li><a href="#">dress</a></li>
+
+                            <div class="clearfix"> </div>
+                        </ul>
+
+                    </div>
+
+                </div>*@
+                <!---->
+                @*<div class="product-bottom">
+                    <div class="of-left-in">
+                        <h3 class="best">Best Sellers</h3>
+                    </div>
+                    <div class="product-go">
+                        <div class=" fashion-grid">
+                            <a href="#"><img class="img-responsive " src="~/Content/images/p1.jpg" alt=""></a>
+
+                        </div>
+                        <div class=" fashion-grid1">
+                            <h6 class="best2">
+                                <a href="#">
+                                    Lorem ipsum dolor sit
+                                    amet consectetuer
+                                </a>
+                            </h6>
+
+                            <span class=" price-in1"> $40.00</span>
+                        </div>
+
+                        <div class="clearfix"> </div>
+                    </div>
+                    <div class="product-go">
+                        <div class=" fashion-grid">
+                            <a href="#"><img class="img-responsive " src="~/Content/images/p2.jpg" alt=""></a>
+
+                        </div>
+                        <div class="fashion-grid1">
+                            <h6 class="best2">
+                                <a href="#">
+                                    Lorem ipsum dolor sit
+                                    amet consectetuer
+                                </a>
+                            </h6>
+
+                            <span class=" price-in1"> $40.00</span>
+                        </div>
+
+                        <div class="clearfix"> </div>
+                    </div>
+                </div>*@
+                @Html.Action("XemNhieuNhat", "Sanpham")
+                <div class=" per1">
+                    @*<a href="#">
+                        <img class="img-responsive" src="~/Content/images/pro.jpg" alt="">
+                        <div class="six1">
+                            <h4>DISCOUNT</h4>
+                            <p>Up to</p>
+                            <span>60%</span>
+                        </div>
+                    </a>*@
+                    <div id="fb-root"></div>
+                        <script>
+                            (function(d, s, id) {
+                              var js, fjs = d.getElementsByTagName(s)[0];
+                              if (d.getElementById(id)) return;
+                              js = d.createElement(s); js.id = id;
+                              js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.7&appId=306097136425641";
+                              fjs.parentNode.insertBefore(js, fjs);
+                            }(document, 'script', 'facebook-jssdk'));
+                        </script>
+
+                    <div class="fb-page" data-href="https://www.facebook.com/New-Shop-1795046274076162/" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/New-Shop-1795046274076162/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/New-Shop-1795046274076162/">New Shop</a></blockquote></div>
+                </div>
+            </div>
+            @RenderBody()
+            @*<div class="col-md-9 product-price1">
+                <div class="col-md-5 single-top">
+                    <div class="flexslider">
+                        <ul class="slides">
+                            <li data-thumb="images/si.jpg">
+                                <img src="~/Content/images/si.jpg" />
+                            </li>
+                            <li data-thumb="images/si1.jpg">
+                                <img src="~/Content/images/si1.jpg" />
+                            </li>
+                            <li data-thumb="images/si2.jpg">
+                                <img src="~/Content/images/si2.jpg" />
+                            </li>
+                            <li data-thumb="images/si.jpg">
+                                <img src="~/Content/images/si.jpg" />
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- FlexSlider -->
+                    <script defer src="~/Content/js/jquery.flexslider.js"></script>
+                    <link rel="stylesheet" href="~/Content/css/flexslider.css" type="text/css" media="screen" />
+
+                    <script>
+// Can also be used with $(document).ready()
+$(window).load(function() {
+  $('.flexslider').flexslider({
+    animation: "slide",
+    controlNav: "thumbnails"
+  });
+});
+                    </script>
+                </div>
+                <div class="col-md-7 single-top-in simpleCart_shelfItem">
+                    <div class="single-para ">
+                        <h4>Lorem Ipsum</h4>
+                        <div class="star-on">
+                            <ul class="star-footer">
+                                <li><a href="#"><i> </i></a></li>
+                                <li><a href="#"><i> </i></a></li>
+                                <li><a href="#"><i> </i></a></li>
+                                <li><a href="#"><i> </i></a></li>
+                                <li><a href="#"><i> </i></a></li>
+                            </ul>
+                            <div class="review">
+                                <a href="#"> 1 customer review </a>
+
+                            </div>
+                            <div class="clearfix"> </div>
+                        </div>
+
+                        <h5 class="item_price">$ 95.00</h5>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
+                            diam nonummy nibh euismod tincidunt ut laoreet dolore
+                            magna aliquam erat
+                        </p>
+                        <div class="available">
+                            <ul>
+                                <li>
+                                    Color
+                                    <select>
+                                        <option>Silver</option>
+                                        <option>Black</option>
+                                        <option>Dark Black</option>
+                                        <option>Red</option>
+                                    </select>
+                                </li>
+                                <li class="size-in">
+                                    Size<select>
+                                        <option>Large</option>
+                                        <option>Medium</option>
+                                        <option>small</option>
+                                        <option>Large</option>
+                                        <option>small</option>
+                                    </select>
+                                </li>
+                                <div class="clearfix"> </div>
+                            </ul>
+                        </div>
+                        <ul class="tag-men">
+                            <li>
+                                <span>TAG</span>
+                                <span class="women1">: Women,</span>
+                            </li>
+                            <li>
+                                <span>SKU</span>
+                                <span class="women1">: CK09</span>
+                            </li>
+                        </ul>
+                        <a href="#" class="add-cart item_add">ADD TO CART</a>
+
+                    </div>
+                </div>
+                <div class="clearfix"> </div>
+                <!---->
+                *@    
+        </div>
+        <div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+    <!--//content-->
+    <div class="footer">
+        <div class="container">
+            <div class="footer-top-at">
+
+                <div class="col-md-4 amet-sed">
+                    <h4>MORE INFO</h4>
+                    <ul class="nav-bottom">
+                        <li><a href="#">How to order</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="contact.html">Location</a></li>
+                        <li><a href="#">Shipping</a></li>
+                        <li><a href="#">Membership</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 amet-sed ">
+                    <h4>CONTACT US</h4>
+
+                    <p>
+                        Contrary to popular belief
+                    </p>
+                    <p>The standard chunk</p>
+                    <p>office:  +12 34 995 0792</p>
+                    <ul class="social">
+                        <li><a href="#"><i> </i></a></li>
+                        <li><a href="#"><i class="twitter"> </i></a></li>
+                        <li><a href="#"><i class="rss"> </i></a></li>
+                        <li><a href="#"><i class="gmail"> </i></a></li>
+
+                    </ul>
+                </div>
+                <div class="col-md-4 amet-sed">
+                    <h4>Newsletter</h4>
+                    <p>
+                        Sign Up to get all news update
+                        and promo
+                    </p>
+                    <form>
+                        <input type="text" value="" onfocus="this.value='';" onblur="if (this.value == '') {this.value ='';}">
+                        <input type="submit" value="Sign up">
+                    </form>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+        <div class="footer-class">
+            <p>© 2015 New store All Rights Reserved | Design by  <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>
+        </div>
+    </div>
+    <div id="fb-root"></div>
+    <script>$(document).ready(function() {var raido = $(".wrap").attr("data-toggle");if(raido==1){$(".mnv-tuvan").css("display","none");$(".x").click(function(){$(".wrap").slideToggle();$(".mnv-tuvan").slideToggle();});$(".mnv-tuvan").click(function(){$(".wrap").slideToggle();$(this).slideToggle();}); }else{$(".wrap").css("display","none");$(".x").click(function(){$(".wrap").slideToggle();$(".mnv-tuvan").slideToggle();});$(".mnv-tuvan").click(function(){$(".wrap").slideToggle();$(this).slideToggle();});}}) (function(d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) return;js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.5&appId=887080981367835";fjs.parentNode.insertBefore(js, fjs);}(document, "script", "facebook-jssdk"));</script>
+    <style>
+        .wrap {
+            position: fixed;
+            width: 300px;
+            height: 400px;
+            z-index: 9999999;
+            right: 0px;
+            bottom: 0px;
+        }
+
+        .x {
+            font-family: arial, helvetica;
+            background: rgba(78,86,101,0.8) none repeat scroll 0 0;
+            font-size: 14px;
+            font-weight: bold;
+            color: #fff;
+            display: inline-block;
+            height: 25px;
+            line-height: 25px;
+            position: absolute;
+            right: 0;
+            text-align: center;
+            top: -19px;
+            width: 25px;
+            z-index: 99999999;
+        }
+
+            .x:hover {
+                cursor: pointer;
+            }
+
+        .pxem {
+            text-align: left;
+            height: 20px;
+            margin-bottom: 0;
+            margin-top: 0;
+            background: #0088b5;
+            width: 100%;
+            bottom: 0;
+            display: block;
+            left: 0px;
+            position: absolute;
+            z-index: 999999999;
+            border-left: 1px solid #fff;
+        }
+
+            .pxem a.axem {
+                color: #fff;
+                font-family: arial,helvetica;
+                font-size: 12px;
+                line-height: 23px;
+                padding-left: 5px;
+                text-decoration: none;
+            }
+
+                .pxem a.axem:hover {
+                    text-decoration: underline;
+                }
+
+        .alogo {
+            position: absolute;
+            bottom: 0;
+            right: 0px;
+            z-index: 999999999999;
+            width: 40px;
+            height: 20px;
+            display: inline-block;
+            background: #0088b5;
+            padding-right: 0px;
+            padding-left: 5px;
+        }
+
+        .mnv-tuvan {
+            position: fixed;
+            width: 300px;
+            background: #0088b5;
+            z-index: 99999999;
+            right: 0px;
+            bottom: 0px;
+            border-style: solid solid none;
+            border-width: 1px 1px 0;
+            border-color: #fff;
+        }
+
+            .mnv-tuvan p {
+                color: #fff;
+                font-size: 15px;
+                margin: 0;
+                padding: 0 13px;
+                text-align: left;
+            }
+
+                .mnv-tuvan p a {
+                    color: #fff;
+                    font-size: 15px;
+                    padding: 5px 0px 7px;
+                    margin: 0;
+                    display: inline-block;
+                    font-family: arial, helvetica;
+                    text-decoration: none;
+                }
+
+                    .mnv-tuvan p a:hover {
+                        text-decoration: underline;
+                        cursor: pointer;
+                    }
+
+                .mnv-tuvan p img {
+                    float: right;
+                    margin-top: 10px;
+                }
+    </style>
+    <div data-toggle="1" class="wrap" style="position:fixed; width:250px; height: 325px; ">
+        <span class="x" style="">X</span>
+        <div class="fb-page" data-adapt-container-width="true" data-height="325" data-hide-cover="false" data-href="https://www.facebook.com/New-Shop-1795046274076162/" data-show-facepile="true" data-show-posts="false" data-small-header="false" data-tabs="messages" data-width="250" style="position:relative; z-index:9999999; right:0px; bottom:21px;border-left: 1px solid #fff;border-top: 1px solid #fff;"></div>
+        <p class="pxem" style=""><a class="axem" style="" href=" http://web24h.vn/news-14-200/huong-dan-cai-dat-live-chat-fanpage.html" target="_blank">Cài đặt live chat fanpage</a>
+            <a class="alogo" style="">
+                <img src="http://pront04.web24h.vn/Uploaded/Members/9558/images/2015/11/logo-web.png" width="27px" height="14px" style="margin-top: 3px">
+            </a>
+         </p>
+    </div>
+    <div class="mnv-tuvan" style="width: 248px;">
+        <p style=" ">
+        <a style="">Bạn cần tư vấn ?</a>
+        <img src="http://pront04.web24h.vn/Uploaded/Members/9558/images/2015/11/supprt.png">
+        </p>
+    </div>
+</body>
+</html>

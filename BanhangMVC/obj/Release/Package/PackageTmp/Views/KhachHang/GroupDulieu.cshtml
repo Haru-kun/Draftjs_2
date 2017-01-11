@@ -1,0 +1,17 @@
+﻿@using BanhangMVC.Models;
+@model List<ThanhVien>
+@{
+    ViewBag.Title = "GroupDulieu";
+}
+
+<div>
+    @foreach (var GroupThanhVien in Model.GroupBy(x => x.LoaiThanhVien))
+    {
+        <div>@GroupThanhVien.Key.TenLoai</div>
+        foreach (var item in GroupThanhVien)
+        {
+            <p>@item.TaiKhoan</p>
+        }
+    }
+</div>
+

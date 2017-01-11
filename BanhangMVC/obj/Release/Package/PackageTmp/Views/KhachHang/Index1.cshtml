@@ -1,0 +1,37 @@
+﻿@model IEnumerable<BanhangMVC.Models.KhachHang>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index1</title>
+</head>
+<body>
+    <div> 
+        <table border="1">
+            <tr>
+                <td>MaKH</td>
+                <td>TenKH</td>
+                <td>Diachi</td>
+                <td>SoDT</td>
+                <td>Email</td>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.MaKH</td>
+                    <td>@item.TenKH</td>
+                    <td>@item.DiaChi</td>
+                    <td>@item.SoDienThoai</td>
+                    <td>@item.Email</td>
+                </tr>    
+            }
+        </table>
+        @Html.RouteLink("Click me for change khac Hang Page", "khachhang")
+    </div>
+</body>
+</html>

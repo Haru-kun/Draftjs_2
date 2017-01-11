@@ -1,0 +1,81 @@
+﻿@using CaptchaMvc.HtmlHelpers
+@using CaptchaMvc
+@using BanhangMVC.Models
+@model ThanhVien
+
+@{
+    ViewBag.Title = "Dangky";
+    Layout = "~/Views/Layout/DangkyLayout.cshtml";
+    List<String> cauhoi = (List<String>)ViewBag.CauHoi;
+}
+
+<div class="container">
+    <div class="register">
+        <h1>Đăng Ký Thành Viên</h1>
+        <form action="" method="post">
+ 
+            <div class="col-md-6 register-top-grid">
+                <h3>Thông Tin Cá Nhân</h3>
+                <div>
+                    <span>Họ và Tên</span>
+                    <input type="text" name="HoTen">
+                </div>
+                <div>
+                    <span>Địa Chi</span>
+                    <input type="text" name="DiaChi">
+                </div>
+                <div>
+                    <span>Email</span>
+                    <input type="text" name="Email">
+                </div>
+                <div>
+                    <span>Số Điện Thoại</span>
+                    <input type="text" name="SoDienThoai">
+                </div>
+                <div style="margin-top: 40px;">
+                    <a class="news-letter" href="#">
+                        <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i>Nhận thông tin khuyến mãi</label>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-6 register-bottom-grid">
+                <h3>Thông Tin Đăng Nhập</h3>
+                <div class="register-top-grid">
+                    <span>Tên Tài Khoản</span>
+                    <input type="text" name="TaiKhoan">
+                </div>
+                <div>
+                    <span>Mật Khẩu</span>
+                    <input type="password" name="MatKhau">
+                </div>
+                <div>
+                    <span>Xác Nhận Mật Khẩu</span>
+                    <input type="password" name="Matkhau">
+                </div>
+                <div class="register-top-grid">
+                    <span>Câu Hỏi Bí Mật</span>
+                    <select name="CauHoi" style="width:100%; height:50px; margin-top:16px;">
+                        @foreach (var item in cauhoi)
+                        {
+                            <option>@item</option>
+                        }
+                        <option></option>
+                    </select>
+                </div>
+                <div class="register-top-grid" style="margin-top:30px;">
+                    <span>Câu Trả Lời</span>
+                    <input type="text" name="CauTraLoi">
+                </div>
+            </div>
+            <div style="width:100%; text-align:center">
+                <div style="margin:10px;">
+                    @Html.Captcha(5)
+                </div>
+                <div style="color:orangered;font-size:larger">@ViewBag.Thongbao</div>
+                <input style="width:50%;" type="submit" value="Đăng Ký">
+            </div>
+            <div class="clearfix"> </div>
+        </form>
+    </div>
+</div>
+

@@ -1,0 +1,164 @@
+﻿@using BanhangMVC.Models.View
+@model IEnumerable<GioHang>
+
+@{
+    ViewBag.Title = "XemGioHang";
+    Layout = "~/Views/Layout/GioHangLayout.cshtml";
+
+    double tongtiensp = (double)ViewBag.TongTien;
+    double phi = 0;
+    if (ViewBag.TongSoLuong == 0)
+    {
+        phi = 0;
+    }
+    else
+    {
+        if (ViewBag.TongSoLuong >= 2)
+        {
+            phi = 50000;
+        }
+        else
+        {
+            phi = 25000;
+        }
+    }
+    double tongthanhtoan = phi + tongtiensp;
+}
+
+
+<h1>Giỏ hàng của bạn</h1>
+<div class="col-md-9 cart-items">
+    @if (Model == null || Model.Count() == 0)
+    {
+        <h1 style="align-content:center; color:darkorange">Giỏ hàng của bạn hiện đang trống !!! </h1>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+        @*<script>
+        $(document).ready(function(c) {
+        $('#@item.MaSP').on('click', function(c){
+            $('.cart-header').fadeOut('slow', function(c){
+                $('.cart-header').remove();
+            });
+            });
+        });
+    </script>*@
+        <div class="cart-header">
+            <div id="@item.MaSP" ><a href="@Url.Action("XoaGioHang", "GioHang", new { @masp = item.MaSP })" class="btn-danger" id="gh_item_xoa" style="">X</a></div>
+            <div class="cart-sec simpleCart_shelfItem">
+                <div class="cart-item cyc">
+                    <img src="@Url.Content("~/Content/HinhanhSP/" + item.HinhAnh)" class="img-responsive" alt="" />
+                </div>
+                <div class="cart-item-info">
+                    <h3><a href="#">@item.TenSP</a><span>Mã sản phẩm: @item.MaSP</span></h3>
+                    <ul class="qty">
+                        <li><p>Đơn giá : @item.Dongia.ToString("#,## VND")</p></li>
+                        <li><p>Số lượng : @item.Soluong</p></li>
+                    </ul>
+                    <div class="delivery">
+                        <p>Thành tiền : @item.ThanhTien.ToString("#,## VND")</p>
+                        <span><a href="@Url.Action("SuaGioHang", "GioHang", new { @masp = item.MaSP })" >Chỉnh sửa sản phẩm</a></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        }
+    }
+</div>
+<div class="col-md-3 cart-total">
+    <a class="continue" href="@Url.Action("Index", "Home")">Tiếp tục mua hàng</a>
+    <div class="price-details">
+        <h3>Chi tiết giá</h3>
+        <span>Tổng tiền sản phẩm</span>
+        <span class="total1">@tongtiensp.ToString("#,## VNĐ")</span>
+        <span>Giảm</span>
+        <span class="total1">---</span>
+        <span>Phí giao hàng</span>
+        <span class="total1">@phi.ToString("#,## VNĐ")</span>
+        <div class="clearfix"></div>
+    </div>
+    <ul class="total_price">
+        <li class="last_price"> <h4>Tổng Thanh Toán</h4></li>
+        <li class="last_price"><span>@tongthanhtoan.ToString("#,## VNĐ")</span></li>
+        <div class="clearfix"> </div>
+    </ul>
+    <div class="clearfix"></div>
+    <div id="thongtindathang" style="margin-top: 30px;padding: 10px;">
+        <form role="form" method="post" action="@Url.Action("DatHang", "GioHang")">
+                @if (Session["taikhoan"] == null)
+                {
+                    <h3 style="color: #000; font-size: 1.2em;margin-bottom: 1em;">Thông Tin Khách Hàng</h3>
+                    <div class="form-group">
+                        <label for="hoten">Họ và tên:</label>
+                        <input type="text" class="form-control" id="hoten" name="TenKH" placeholder="Nhập họ và tên của bạn">
+                        <p id="thongbao_hoten" style="color:orangered"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Địa chỉ:</label>
+                        <input type="text" class="form-control" id="diachi" name="DiaChi" placeholder="Nhập địa chỉ của bạn">
+                        <p id="thongbao_diachi" style="color:orangered"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Email:</label>
+                        <input type="email" class="form-control" id="email" name="Email" placeholder="Nhập email của bạn">
+                        <p id="thongbao_email" style="color:orangered"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="sodienthoai">Số điện thoại:</label>
+                        <input type="number" class="form-control" id="sodienthoai" name="SoDienThoai" placeholder="Nhập số điện thoại của bạn">
+                        <p id="thongbao_sodienthoai" style="color:orangered"></p>
+                    </div>
+            }
+                @Html.Hidden("ThanhVien", Session["taikhoan"])
+            <button type="submit" class="btn btn-default" id="dathang">Đặt Hàng</button>
+        </form>
+    </div>
+
+    @*<a class="order" href="@Url.Action("DatHang","GioHang")">Đặt Hàng</a>*@
+    @*<div class="total-item">
+        <h3>OPTIONS</h3>
+        <h4>COUPONS</h4>
+        <a class="cpns" href="#">Áp dụng phiếu giảm giá</a>
+        <p><a href="#">Log In</a> to use accounts - linked coupons</p>
+    </div>*@
+</div>
+<script>
+    $("#dathang").click(function () {
+        var hoten = $("#hoten").val();
+        var diachi = $("#diachi").val();
+        var email = $("#email").val();
+        var sodienthoai = $("#sodienthoai").val();
+        var loi = 0;
+        var thanhvien = Session["taikhoan"];
+        if (thanhvien != null) {
+            return true;
+        }
+        else {
+            if (isNaN(sodienthoai) == true || sodienthoai == null || sodienthoai == "") {
+                $("#thongbao_sodienthoai").text("Số điện thoại còn trống hoặc không đúng !!!");
+                loi++;
+            }
+            if (hoten == null || hoten == "") {
+                $("#thongbao_hoten").text("Họ tên của bạn còn trống !!!");
+                loi++;
+            }
+            if (diachi == null || diachi == "") {
+                $("#thongbao_diachi").text("Địa chỉ của bạn còn trống !!!");
+                loi++;
+            }
+            if (email == null || email == "") {
+                $("#thongbao_email").text("email của bạn còn trống hoặc không đúng !!!");
+                loi++;
+            }
+            if (loi > 0) {
+                return false;
+            }
+        }
+        
+    });
+</script>
+
