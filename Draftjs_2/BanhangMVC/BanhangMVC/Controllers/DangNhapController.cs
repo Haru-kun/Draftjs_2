@@ -45,5 +45,20 @@ namespace BanhangMVC.Controllers
         {
             return View();
         }
+		public ActionResult XulyDangxuat()
+        {
+            Session["taikhoan"] = null;
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
+        }
+		public ActionResult DangNhapAdmin()
+        {
+            return View();
+        }
+
+        public ActionResult DangNhapAdminPartial()
+        {
+            return PartialView();
+        }
     }
 }
