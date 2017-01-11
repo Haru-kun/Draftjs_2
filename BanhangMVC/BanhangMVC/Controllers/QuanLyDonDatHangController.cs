@@ -95,17 +95,5 @@ namespace BanhangMVC.Controllers
         }
 
         
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (db != null)
-                {
-                    db.Dispose();
-                }
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }
