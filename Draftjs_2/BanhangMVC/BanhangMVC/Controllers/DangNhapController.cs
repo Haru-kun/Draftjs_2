@@ -88,5 +88,21 @@ namespace BanhangMVC.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("DangNhapAdmin");
         }
+		 public void PhanQuyen(string TaiKhoan, string Quyen)
+        {
+            FormsAuthentication.Initialize();
+            var ticket = new FormsAuthenticationTicket(1,
+                                                        TaiKhoan, //user
+                                                        DateTime.Now, //begin
+                                                        DateTime.Now.AddHours(3), //timeout
+                                                        false, //remember?
+                                                        Quyen, // permission.. "admin" or for more than one admin,marketing,sales"
+                                                        FormsAuthentication.FormsCookiePath);
+
+            var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(ticket));
+            //encrypt d? mã hóa b?o m?t thông tin
+            if (ticket.IsPersistent) cookie.Expires = ticket.Expiration;// ki?m tra cookie có t?n t?i hay chua
+            Response.Cookies.Add(cookie);
+        }
     }
 }
