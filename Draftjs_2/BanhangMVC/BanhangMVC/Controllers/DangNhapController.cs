@@ -60,5 +60,33 @@ namespace BanhangMVC.Controllers
         {
             return PartialView();
         }
+		public ActionResult XuLyDangNhapAdmin(FormCollection f)
+        {
+            String user = f["username"].ToString();
+            String pass = f["password"].ToString();
+
+            ThanhVien tv = db.ThanhViens.SingleOrDefault(x => x.TaiKhoan == user && x.MatKhau == pass);
+            if (tv != null)
+            {
+                var listQuyen = db.LoaiThanhVien_Quyen.Where(x => x.MaLoaiTV == tv.MaLoaiTV);
+                Session["thanhvien"] = tv;
+                String Quyen = "";
+                foreach (var item in listQuyen)
+                {
+                    Quyen += item.Quyen.MaQuyen + ",";
+                }
+                Quyen = Quyen.Substring(0, Quyen.Length - 1);
+                PhanQuyen(tv.TaiKhoan, Quyen);
+                return RedirectToAction("QuanLySanPham", "QuanLySanPham");
+            }
+            return View("Tên dang nh?p ho?c m?t kh?u không dúng !!!");
+        }
+
+        public ActionResult XuLyDangXuatAdmin()
+        {
+            Session["thanhvien"] = null;
+            FormsAuthentication.SignOut();
+            return RedirectToAction("DangNhapAdmin");
+        }
     }
 }
