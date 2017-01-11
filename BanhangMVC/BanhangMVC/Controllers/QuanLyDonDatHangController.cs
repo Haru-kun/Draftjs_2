@@ -70,31 +70,31 @@ namespace BanhangMVC.Controllers
             ddhUpdate.TinhTrang = ddh.TinhTrang;
             db.SaveChanges();
             GuiEmail("Xác nhận đơn hàng", "bachquangthang901603@gmail.com", "bachquangthang901603@gmail.com","thangbach1995","Don hang duoc xac nhan");
-            //GuiEmail("Xác nhận đơn hàng", "bachquangthang901603@gmail.com", "bachquangthang901603@gmail.com", "thangbach1995", );
+            
 
             return RedirectToAction("ChuaThanhToan");
         }
 
         public void GuiEmail(string Title, string ToEmail, string FromEmail, string PassWord, string Content)
         {
-            // goi email
+           
             MailMessage mail = new MailMessage();
-            mail.To.Add(ToEmail); // Địa chỉ nhận
-            mail.From = new MailAddress(ToEmail); // Địa chửi gửi
-            mail.Subject = Title;  // tiêu đề gửi
-            mail.Body = "";  // Nội dung
+            mail.To.Add(ToEmail); 
+            mail.From = new MailAddress(ToEmail); 
+            mail.Subject = Title; 
+            mail.Body = "";  
             mail.IsBodyHtml = true;
             SmtpClient smtp = new SmtpClient();
-            smtp.Host = "smtp.gmail.com"; // host gửi của Gmail
-            smtp.Port = 587;               //port của Gmail
+            smtp.Host = "smtp.gmail.com"; 
+            smtp.Port = 587;               
             smtp.UseDefaultCredentials = false;
             smtp.Credentials = new System.Net.NetworkCredential
-            (FromEmail, PassWord);//Tài khoản password người gửi
-            smtp.EnableSsl = true;   //kích hoạt giao tiếp an toàn SSL
-            smtp.Send(mail);   //Gửi mail đi
+            (FromEmail, PassWord);
+            smtp.EnableSsl = true;   
+            smtp.Send(mail);   
         }
 
-        // Giải phóng bộ nhớ khi không sử dụng
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing)
