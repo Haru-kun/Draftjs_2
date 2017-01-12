@@ -1,0 +1,108 @@
+@using CaptchaMvc.HtmlHelpers
+@using CaptchaMvc
+@using BanhangMVC.Models
+@model ThanhVien
+@{
+    ViewBag.Title = "Dangky1";
+    Layout = "~/Views/Layout/DangkyLayout.cshtml";
+    List<String> cauhoi = (List<String>)ViewBag.CauHoi;
+}
+
+<style>
+    #btn_dk:hover{
+        background:black;
+    }
+</style>
+
+<div class="container">
+    <div class="register">
+        <h1>Ðang Ký Thành Viên</h1>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal" style="margin: 0 auto;">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="register-left">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TaiKhoan, htmlAttributes: new { @class = "control-label col-md-2" ,@id = "title-register" })
+                         <div class="col-md-10">
+                            @Html.EditorFor(model => model.TaiKhoan, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.TaiKhoan, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MatKhau, htmlAttributes: new { @class = "control-label col-md-2" ,@id = "title-register" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.MatKhau, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.HoTen, htmlAttributes: new { @class = "control-label col-md-2", @id="title-register" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.HoTen, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.HoTen, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DiaChi, htmlAttributes: new { @class = "control-label col-md-2" ,@id = "title-register" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="register-right">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" ,@id = "title-register" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SoDienThoai, htmlAttributes: new { @class = "control-label col-md-2" ,@id = "title-register" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.SoDienThoai, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.SoDienThoai, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CauHoi, htmlAttributes: new { @class = "control-label col-md-2" ,@id = "title-register" })
+                        @*@Html.DropDownList("CauHoi")*@
+                        <div class="col-md-10">
+                            <select name="CauHoi" style="width: 100%; height: 35px; border-radius: 3px;">
+                                @foreach (var item in cauhoi)
+                                {
+                                    <option>@item</option>
+                                }
+                                <option></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="MARGIN-top: 25px;">
+                        @Html.LabelFor(model => model.CauTraLoi, htmlAttributes: new { @class = "control-label col-md-2" ,@id = "title-register" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.CauTraLoi, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CauTraLoi, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="foot-register">
+                    <div style="margin:10px;margin-top:40px;">
+                        @Html.Captcha(5)
+                    </div>
+                    <div style="color:orangered;font-size:larger">@ViewBag.Thongbao</div>
+                    <input style="width:30%;margin-left:10px;background:rgb(239, 95, 33) none repeat scroll 0% 0%" type="submit" id="btn_dk" value="Ðang Ký">
+                </div>
+            </div>
+        }
+    </div>
+</div>

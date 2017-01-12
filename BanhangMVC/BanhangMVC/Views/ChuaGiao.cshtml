@@ -1,0 +1,55 @@
+﻿@using BanhangMVC.Models
+@model IEnumerable<BanhangMVC.Models.DonDatHang>
+
+
+@{
+    ViewBag.Title = "ChuaGiao";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+
+    WebGrid grid = new WebGrid(source: Model, rowsPerPage: 10);
+}
+
+<h2>Kiểm Tra Đơn Hàng</h2>
+<style>
+    #nav_donhang{
+        margin-top:20px;
+    }
+
+    #nav_donhang a {
+        background: #1c445f;
+    }
+    .imgs {
+        width: 200px;
+        height: 200px;
+        padding: 5px;
+    }
+
+    .gridTable {
+        border: 2px solid #1c445f;
+    }
+
+    .gridHead th {
+        padding: 5px;
+        text-align: center;
+        background: #eaff00;
+        border: 2px solid #1c445f;
+    }
+
+    .gridTable tr td {
+        padding: 5px;
+        text-align: center;
+        border: 2px solid #1c445f;
+    }
+     #data{
+        margin-top:60px;
+    }
+</style>
+<ul class="nav navbar-nav" id="nav_donhang">
+    <li >@Ajax.ActionLink("Chưa thanh toán", "ChuaThanhToan", "QuanLyDonDatHang", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "data" })</li>
+    <li class="active">@Ajax.ActionLink("Chưa giao", "ChuaGiao", "QuanLyDonDatHang", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "data" })</li>
+    <li>@Ajax.ActionLink("Đã giao và thanh toán", "DaGiaoThanhToan", "QuanLyDonDatHang", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "data" })</li>
+    <li><a href="#">Đã hủy</a></li>
+</ul>
+
+
+
