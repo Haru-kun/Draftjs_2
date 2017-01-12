@@ -1,0 +1,16 @@
+﻿@{
+
+
+}
+<div class="cart box_1" id="divgiohang">
+    <a href="@Url.Action("XemGioHang","GioHang")">
+        <h3>
+            <div class="total">
+                <span>@String.Format("{0:0,0 VNĐ}",ViewBag.TT)@*ViewBag.TT*@</span> (<span>@ViewBag.TSL&nbsp;</span>Sản phẩm)
+            </div>
+            <img src="~/Content/images/cart.png" alt="" />
+        </h3>
+    </a>
+    <p><a href="@Url.Action("XemGioHang","GioHang")">Giỏ Hàng</a></p>
+
+</div>

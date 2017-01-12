@@ -1,0 +1,11 @@
+﻿@using BanhangMVC.Models;
+
+<div style="width:100%; height:100%; padding-left:10px;padding-bottom:10px">
+    @if (Session["thanhvien"] != null)
+    {
+        ThanhVien tv = (ThanhVien)Session["thanhvien"];
+        <span style="color:white;font-size:1.5em;">@tv.HoTen</span>
+        <a href="@Url.Action("XuLyDangXuatAdmin","DangNhap")" style="float:right;font-size: 25px; padding-right: 10px; color: #eaff00;"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+
+    }
+</div>
