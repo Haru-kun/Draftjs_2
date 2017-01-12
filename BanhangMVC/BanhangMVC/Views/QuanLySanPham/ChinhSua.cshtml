@@ -1,0 +1,356 @@
+﻿@model BanhangMVC.Models.SanPham
+
+@{
+    ViewBag.Title = "ThemSanPhamMoi";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+    List<String> error = (List<string>)ViewBag.upload; 
+}
+
+<h2>Chỉnh Sửa Sản Phẩm</h2>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+<script src="~/Content/tinymce/js/tinymce/tinymce.min.js"></script>
+
+<script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  });
+</script>
+<script>
+    tinymce.init({
+        selector: '.mota',
+        height: 500,
+        plugins: [
+          'advlist autolink lists link image charmap print preview anchor',
+          'searchreplace visualblocks code fullscreen',
+          'insertdatetime media table contextmenu paste code'
+        ],
+        toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+        content_css: [
+          '//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
+          '//www.tinymce.com/css/codepen.min.css'
+        ]
+    });
+</script>
+<script>
+
+    $(document).ready(function () {
+        $("#cs_change").click(function () {
+            $("#cs_huy").show()
+            $("#input").show();
+            $("#img").hide();
+            $("#cs_change").hide();
+        });
+    });
+    $(document).ready(function () {
+        $("#cs_huy").click(function () {
+            $("#btn_hinh").hide();
+            $("#cs_huy").hide();
+            $("#img").show();
+            $("#input").hide();
+            $("#cs_change").show();
+        });
+    });
+    ////////////////////////////////
+    $(document).ready(function () {
+        $("#cs_change_1").click(function () {
+            $("#btn_hinh1").show();
+            $("#cs_huy_1").show();
+            $("#img_1").hide();
+            $("#input1").show();
+            $("#cs_change_1").hide();
+        });
+    });
+    $(document).ready(function(){
+        $("#cs_huy_1").click(function () {
+            $("#btn_hinh1").hide();
+            $("#cs_huy_1").hide();
+            $("#img_1").show();
+            $("#input1").hide();
+            $("#cs_change_1").show();
+        });
+    });
+    //////////////////////////////////
+    $(document).ready(function () {
+        $("#cs_change_2").click(function () {
+            $("#btn_hinh2").show();
+            $("#cs_huy_2").show();
+            $("#img_2").hide();
+            $("#input2").show();
+            $("#cs_change_2").hide();
+        });
+    });
+    $(document).ready(function () {
+        $("#cs_huy_2").click(function () {
+            $("#btn_hinh2").hide();
+            $("#cs_huy_2").hide();
+            $("#img_2").show();
+            $("#input2").hide();
+            $("#cs_change_2").show();
+        });
+    });
+    /////////////////////////////
+    $(document).ready(function () {
+        $("#cs_change_3").click(function () {
+            $("#btn_hinh3").show();
+            $("#cs_huy_3").show();
+            $("#img_3").hide();
+            $("#input3").show();
+            $("#cs_change_3").hide();
+        });
+    });
+    $(document).ready(function () {
+        $("#cs_huy_3").click(function () {
+            $("#btn_hinh3").hide();
+            $("#cs_huy_3").hide();
+            $("#img_3").show();
+            $("#input3").hide();
+            $("#cs_change_3").show();
+        });
+    });
+    ///////////////////////
+    $(document).ready(function () {
+        $("#cs_change_4").click(function () {
+            $("#btn_hinh4").show();
+            $("#cs_huy_4").show();
+            $("#img_4").hide();
+            $("#input4").show();
+            $("#cs_change_4").hide();
+        });
+    });
+    $(document).ready(function () {
+        $("#cs_huy_4").click(function () {
+            $("#btn_hinh4").hide();
+            $("#cs_huy_4").hide();
+            $("#img_4").show();
+            $("#input4").hide();
+            $("#cs_change_4").show();
+        });
+    });
+</script>
+
+
+@using (Html.BeginForm(Html.BeginForm("ChinhSua", "QuanLySanPham", FormMethod.Post, new { @enctype = "multipart/form-data" })))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.Hidden("HinhAnh", Model.HinhAnh)
+        @Html.Hidden("HinhAnh1", Model.HinhAnh1)
+        @Html.Hidden("HinhAnh2", Model.HinhAnh2)
+        @Html.Hidden("HinhAnh3", Model.HinhAnh3)
+        @Html.Hidden("HinhAnh4", Model.HinhAnh4)
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.Hidden("MaSP",Model.MaSP)
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.MaSP, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MaSP, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MaSP, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TenSP, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10" style="width:750px;">
+                @Html.EditorFor(model => model.TenSP, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TenSP, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DonGia, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10" style="width:750px;">
+                @Html.EditorFor(model => model.DonGia, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DonGia, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NgayCapNhat, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10" style="width:750px;">
+                @if (Model.NgayCapNhat!=null)
+                {
+                    @Html.EditorFor(model => model.NgayCapNhat, new { htmlAttributes = new { @class = "form-control", @id = "datepicker", @value=Model.NgayCapNhat.Value.ToString("MM/dd/yyyy") } })
+                    @Html.ValidationMessageFor(model => model.NgayCapNhat, "", new { @class = "text-danger" })
+                }
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CauHinh, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10" style="width:750px;">
+                @Html.EditorFor(model => model.CauHinh, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CauHinh, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MoTa, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10" style="width:750px;">
+                @*@Html.EditorFor(model => model.MoTa, new { htmlAttributes = new { @class = "form-control"} })*@
+                <textarea class="mota" name="MoTa">@Model.MoTa</textarea>
+                @Html.ValidationMessageFor(model => model.MoTa, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HinhAnh, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10" style="width:750px;">
+                @*@Html.EditorFor(model => model.HinhAnh1, new { htmlAttributes = new { @class = "form-control", @type = "file",@id="btn_hinh1" } })*@
+                <input type="file" name="HinhAnhChon" id="input" style="display:none;"  />
+                @Html.ValidationMessageFor(model => model.HinhAnh, "", new { @class = "text-danger" })
+            </div>
+            <div style="width:100%;align-content:center;margin-top:7px;"><span class="btn_huy" id="cs_huy" style="display:none">Hủy thay đổi</span></div>
+            <p>
+                <img src="@Url.Content("~/Content/HinhanhSP/"+Model.HinhAnh)" class="HinhAnh" name="HinhAnh1" id="img" />
+                <span id="cs_change" class="btn_thaydoi" style="margin-left:20px;">Thay đổi Hình ảnh</span>
+            </p>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HinhAnh1, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10" style="width:750px;">
+                @*@Html.EditorFor(model => model.HinhAnh1, new { htmlAttributes = new { @class = "form-control", @type = "file",@id="btn_hinh1" } })*@
+                <input type="file" name="HinhAnhChon" id="input1" style="display:none;" />
+                @Html.ValidationMessageFor(model => model.HinhAnh1, "", new { @class = "text-danger" })
+            </div>    
+            <div style="width:100%;align-content:center;margin-top:7px;"><span class="btn_huy" id="cs_huy_1">Hủy thay đổi</span></div>
+            <p>
+                <img src="@Url.Content("~/Content/HinhanhSP/"+Model.HinhAnh1)" class="HinhAnh" name="HinhAnh1" id="img_1"  />
+                <span id="cs_change_1" class="btn_thaydoi" style="margin-left:20px;">Thay đổi Hình ảnh</span>
+            </p>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HinhAnh2, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10" style="width:750px;">
+                @*@Html.EditorFor(model => model.HinhAnh2, new { htmlAttributes = new { @class = "form-control", @type = "file", @id = "btn_hinh2" } })*@
+                <input type="file" name="HinhAnhChon" id="input2" style="display:none;" />
+                @Html.ValidationMessageFor(model => model.HinhAnh2, "", new { @class = "text-danger" })
+            </div>
+            <div style="width:100%;align-content:center;margin-top:7px;"><span class="btn_huy" id="cs_huy_2">Hủy thay đổi</span></div>
+            <p>
+                <img src="@Url.Content("~/Content/HinhanhSP/"+Model.HinhAnh2)" class="HinhAnh" id="img_2" />
+                <span id="cs_change_2" class="btn_thaydoi" style="margin-left:20px;">Thay đổi Hình ảnh</span>
+            </p>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HinhAnh3, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10" style="width:750px;">
+                @*@Html.EditorFor(model => model.HinhAnh3, new { htmlAttributes = new { @class = "form-control", @type = "file", @id = "btn_hinh3" } })*@
+                <input type="file" name="HinhAnhChon" id="input3" style="display:none;" />
+                @Html.ValidationMessageFor(model => model.HinhAnh3, "", new { @class = "text-danger" })
+            </div>
+            <div style="width:100%;align-content:center;margin-top:7px;"><span class="btn_huy" id="cs_huy_3">Hủy thay đổi</span></div>
+            <p>
+                <img src="@Url.Content("~/Content/HinhanhSP/"+Model.HinhAnh3)" class="HinhAnh" id="img_3" />
+                <span id="cs_change_3" class="btn_thaydoi" style="margin-left:20px;">Thay đổi Hình ảnh</span>
+            </p>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HinhAnh4, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10" style="width:750px;">
+                @*@Html.EditorFor(model => model.HinhAnh4, new { htmlAttributes = new { @class = "form-control", @type = "file", @id = "btn_hinh4" } })*@
+                <input type="file" name="HinhAnhChon" id="input4" style="display:none;" />
+                @Html.ValidationMessageFor(model => model.HinhAnh4, "", new { @class = "text-danger" })
+            </div>
+            <div style="width:100%;align-content:center;margin-top:7px;"><span class="btn_huy" id="cs_huy_4">Hủy thay đổi</span></div>
+            <p>
+                <img src="@Url.Content("~/Content/HinhanhSP/"+Model.HinhAnh4)" class="HinhAnh" id="img_4" />
+                <span id="cs_change_4" class="btn_thaydoi" style="margin-left:20px;">Thay đổi Hình ảnh</span>
+            </p>
+           @*@foreach (var item in error)
+           {
+            <span style="color:red">item</span>
+           }*@
+            
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SoLuongTon, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10" style="width:750px;">
+                @Html.EditorFor(model => model.SoLuongTon, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SoLuongTon, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.LuotXem, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.LuotXem, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LuotXem, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.LuotBinhChon, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.LuotBinhChon, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LuotBinhChon, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.LuotBinhLuan, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.LuotBinhLuan, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LuotBinhLuan, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Moi, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10" style="width:750px;">
+                @Html.EditorFor(model => model.Moi, new { htmlAttributes = new { @class = "form-control", @value = Model.Moi} })
+                @Html.ValidationMessageFor(model => model.Moi, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaNCC, htmlAttributes: new { @class = "control-label col-md-2"})
+            <div class="col-md-10" style="width:750px;">
+                @Html.DropDownList("MaNCC", null, new { @class = "form-control", @selected = Model.MaNCC })
+                @Html.ValidationMessageFor(model => model.MaNCC, "", new { @class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaNSX, htmlAttributes: new { @class = "control-label col-md-2"})
+            <div class="col-md-10" style="width:750px;">
+                @Html.DropDownList("MaNSX",null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MaNSX, "", new { @class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaLoaiSP, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10" style="width:750px;">
+                @Html.DropDownList("MaLoaiSP", null, new { @class = "form-control", })
+                @Html.ValidationMessageFor(model => model.MaLoaiSP, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DaXoa, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DaXoa, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DaXoa, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
