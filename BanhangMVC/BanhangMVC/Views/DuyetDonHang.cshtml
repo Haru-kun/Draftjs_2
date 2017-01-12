@@ -1,0 +1,145 @@
+﻿@using BanhangMVC.Models
+@model DonDatHang
+
+@{
+    ViewBag.Title = "DuyetDonHang";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+    IEnumerable<ChiTietDonDatHang> listsp = (IEnumerable<ChiTietDonDatHang>)ViewBag.ListSP;
+    var divthongtin = "";
+}
+<style>
+    .info td{
+        padding:10px;
+        padding-left:20px;
+        font-size:20px;
+    }
+    .product{
+        border:1px solid;
+    }
+    .product th{
+        font-size:20px;
+        border:1px solid;
+    }
+     .product td{
+         border:1px solid;
+         text-align: center;
+    }
+</style>
+
+<h2>Duyệt Đơn Hàng</h2>
+<br />
+<br />
+<form action="@Url.Action("DuyetDonHang","QuanLyDonDatHang")" method="post">
+    @Html.Hidden("MaDDH",Model.MaDDH);
+    @Html.Hidden("MaKH", Model.MaKH);
+    <div id="thongtindonhang">
+        <h2  style="color:red">Thông tin người đặt</h2>
+        <br />
+        <div style="float:right;margin-top:5px;margin-right: 70px;">
+            <table>
+                <tr>
+                    <th style="text-align: left;">Ngày đặt:</th>
+                    <td style="text-align:center;">@Model.NgayDat.ToString()</td>
+                </tr>
+                <tr>
+                    <th style="padding-top:10px;text-align: left;">Đã thanh toán:</th>
+                    <td style="text-align:center;padding-top:10px;">
+                        <select name="DaThanhToan" id="sl_thanhtoan">
+                            <option value="True">True</option>
+                            <option value="False">False</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th style="text-align:center;padding-top:10px;" >Đã giao:</th>
+                    <td style="text-align:center;padding-top:10px;">
+                        <select name="TinhTrang">
+                            <option value="True">True</option>
+                            <option value="False">False</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <table class="info">
+            <tr>
+                <td ><b>Tên khách hàng:</b></td>
+                <td style="font-size:15px;">@Model.KhachHang.TenKH</td>
+            </tr>
+            <tr>
+                <td><b>Địa chỉ:</b></td>
+                <td style="font-size:15px;">@Model.KhachHang.DiaChi</td>
+            </tr>
+            <tr>
+                <td><b>Email:</b></td>
+                <td style="font-size:15px;">@Model.KhachHang.Email</td>
+            </tr>
+            <tr>
+                <td><b>Số điện thoại:</b></td>
+                <td style="font-size:15px;">@Model.KhachHang.SoDienThoai</td>
+            </tr>
+        </table>
+        <br />
+        <h2 style="color:red">Danh sách sản phẩm</h2>
+        <br />
+        <table class="product">
+            <tr>
+                <th style="width: 15%;text-align: center;">Hình ảnh</th>
+                <th style="width:55%;text-align:center;">Tên sản phẩm</th>
+                <th style="text-align: center;">Đơn giá</th>
+                <th style="padding-left:20px;text-align: center;">Số lượng</th>
+            </tr>
+        @foreach (var item in listsp)
+        {
+            <tr>
+                <td style="padding-left:20px;font-size:15px;"><img src="@Url.Content("~/Content/HinhanhSP/" + item.SanPham.HinhAnh)" style="width:120px;height:120px;padding:10px;" /></td>
+                <td style="width:55%;font-size:15px;text-align:center">@item.TenSP</td>
+                <td style="font-size:15px;text-align: center;">@String.Format("{0:0,0}", item.DonGia)</td>
+                <td style="font-size:15px;text-align: center;">@item.SoLuong</td>
+            </tr>
+        }
+        </table>
+        <div style="width:100%;margin-right:100px;padding-right: 71px;padding-top: 10px;"><span style="float:right"><b style="font-size:20px;padding-right:20px;">Tổng tiền:</b>@string.Format("{0:0,0} VNĐ", ViewBag.TT)</span></div>
+    </div>
+    <div>
+        <span style="cursor:pointer;" id="btn_in"><i class="fa fa-print" aria-hidden="true" style="font-size:30px;"></i>&nbsp; In hóa đơn</span>
+    </div>
+    <div style="width:100%;padding-left:450px;margin-top:20px;">
+        <input type="submit" style="border-radius:5px;font-size:20px;" class="btn-success" id="btn_luu" value="Lưu đơn hàng" />
+    </div>
+</form>
+<script>
+
+    $(document).ready(function () {
+        $("#btn_in").click(function () {
+            var content = document.getElementById("thongtindonhang").innerHTML;
+            InDonHang(content);
+        });
+    });
+
+   
+
+    function InDonHang(content) {
+        var printWindow = window.open('', '', 'height=400,width=800');
+        printWindow.document.write('<html><head><title>DIV Contents</title>');
+        printWindow.document.write('</head><body >');
+        printWindow.document.write(content);
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+        printWindow.print();
+    }
+
+    
+</script>
+
+<script>
+
+    $(document).ready(function(){
+        $("#btn_thu").click(function () {
+            alert($("#thongtindonhang").html());
+        });
+    });
+
+</script>
+
+
