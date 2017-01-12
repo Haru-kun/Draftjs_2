@@ -1,0 +1,175 @@
+﻿@using BanhangMVC.Models;
+@model SanPham
+@{
+    ViewBag.Title = "ChitietSanpham";
+    Layout = "~/Views/Layout/ProductLayout.cshtml";
+
+    String cauhinh = Model.CauHinh;
+    String[] chuoi = cauhinh.Split(';');
+    IEnumerable<BinhLuan> listBL = (IEnumerable<BinhLuan>)ViewBag.BinhLuan;
+    IEnumerable<SanPham> listSPLQ = (IEnumerable<SanPham>)ViewBag.SanPhamLienQuan;
+}
+
+<script type="text/javascript">
+    function getTextBoxContent() {
+        return document.getElementById('binhluan').value;
+    }
+
+    
+</script>
+<div class="col-md-9 product-price1">
+    <div class="col-md-5 single-top">
+        <div class="flexslider">
+            <ul class="slides">
+                <li data-thumb="@Url.Content("~/Content/HinhanhSP/" + Model.HinhAnh)">
+                    <img src="@Url.Content("~/Content/HinhanhSP/" + Model.HinhAnh)" />
+                </li>
+                <li data-thumb="@Url.Content("~/Content/HinhanhSP/" + Model.HinhAnh1)">
+                    <img src="@Url.Content("~/Content/HinhanhSP/" + Model.HinhAnh1)" />
+                </li>
+                <li data-thumb="@Url.Content("~/Content/HinhanhSP/" + Model.HinhAnh2)">
+                    <img src="@Url.Content("~/Content/HinhanhSP/" + Model.HinhAnh2)" />
+                </li>
+                <li data-thumb="@Url.Content("~/Content/HinhanhSP/" + Model.HinhAnh3)">
+                    <img src="@Url.Content("~/Content/HinhanhSP/" + Model.HinhAnh3)" />
+                </li>
+            </ul>
+        </div>
+        <!-- FlexSlider -->
+        <script defer src="~/Content/js/jquery.flexslider.js"></script>
+        <link rel="stylesheet" href="~/Content/css/flexslider.css" type="text/css" media="screen" />
+
+        <script>
+            // Can also be used with $(document).ready()
+            $(window).load(function () {
+                $('.flexslider').flexslider({
+                    animation: "slide",
+                    controlNav: "thumbnails"
+                });
+            });
+        </script>
+    </div>
+    <div class="col-md-7 single-top-in simpleCart_shelfItem">
+        <div class="single-para ">
+            <h4>@Model.TenSP</h4>
+            <div class="star-on">
+                <ul class="star-footer">
+                    <li><a href="#"><i> </i></a></li>
+                    <li><a href="#"><i> </i></a></li>
+                    <li><a href="#"><i> </i></a></li>
+                    <li><a href="#"><i> </i></a></li>
+                    <li><a href="#"><i> </i></a></li>
+                </ul>
+                <div class="review">
+                    <a href="#"> 1 customer review </a>
+
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+
+            <h5 class="item_price">@String.Format("{0:0,0 vnđ}", Model.DonGia)</h5>
+            <p>
+                <ul class="parameter">
+                    <div style="text-align:left;padding-left:30px;">
+                        <span>Kiểu điện thoại :</span><span>@chuoi[0].ToString();</span><br />
+                        <span>Màn hình :</span><span>@chuoi[1].ToString();</span><br />
+                        <span>Camera :</span><span>@chuoi[2].ToString();</span><br />
+                        <span>Bộ nhớ trong :</span><span>@chuoi[3].ToString();</span><br />
+                        <span>Hệ điều hành :</span><span>@chuoi[4].ToString();</span><br />
+                        <span>Chipset :</span><span>@chuoi[5].ToString();</span><br />
+                        <span>CPU :</span><span>@chuoi[6].ToString();</span><br />
+                        <span>GPU :</span><span>@chuoi[7].ToString();</span><br />
+                        <span>Kích thước :</span><span>@chuoi[8].ToString();</span><br />
+                        @*<span>Kết nối:</span><span>@chuoi[9].ToString();</span><br />
+                            <span>Dung lượng pin:</span><span>@chuoi[10].ToString();</span><br />
+                            <span>Thiết kế:</span><span>@chuoi[11].ToString();</span><br />*@
+                        @*<span>Chức năng đặc biệt:</span><span>@chuoi[12].ToString();</span><br />*@
+                    </div>
+                </ul>
+            </p>
+            @Ajax.ActionLink("Thêm giỏ hàng", "ThemGioHangAjax", "GioHang", new { @masp = Model.MaSP, @url = Request.Url.ToString() }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "divgiohang", InsertionMode = InsertionMode.Replace }, new { @style = ("text-decoration: none;cursor: pointer;color: white;"), @class = (" add-cart item_add") })
+        </div>
+    </div>
+    <div class="clearfix"> </div>
+    <br>
+    <h2 style="color:#EF5F21; font-size:50px;">Bài viết mô tả</h2>
+    <div class="chitietsanpham">
+        @Html.Raw(Model.MoTa)
+    </div>
+    <!---->
+    @*@Html.Action("BinhLuan", "BinhLuan")*@
+    <div class="cd-tabs">
+
+    <hr style="border:2px solid rgb(239, 95, 33)" />
+    <h3 style="width:100%;font-size:30px;color: #ef5f21;">Reviews</h3>
+    <div class="cd-tabs-content">
+        <div data-content="television" class="selected">
+
+            <div class="comments-top-top">
+                @using (Ajax.BeginForm("BinhLuan", "BinhLuan", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "binhluan",InsertionMode=InsertionMode.Replace }))
+                {
+                    @Html.Hidden("MaSP", Model.MaSP);
+                    <div id="binhluan">
+                        @foreach (var item in listBL)
+                        {
+                        <div class="top-comment-right" style="margin-left: 65px;">
+                            <h6><a href="#">@item.ThanhVien.HoTen</a> - September 3, 2014</h6>
+                            <ul class="star-footer">
+                                <li><a href="#"><i> </i></a></li>
+                                <li><a href="#"><i> </i></a></li>
+                                <li><a href="#"><i> </i></a></li>
+                                <li><a href="#"><i> </i></a></li>
+                                <li><a href="#"><i> </i></a></li>
+                            </ul>
+                            <p>@item.NoiDung</p>
+                            @*@Html.Action("BinhLuan", "BinhLuan")*@
+                        </div>
+                        <hr style="width:70%;color:black;border: solid 1px #ef5f21;" />
+
+                        }
+                    </div>
+
+
+                    <div class="clearfix"> </div>
+                    <br />
+                    <input type="text" placeholder="Hãy bình luận gì đó !" class="form-control" id="txt_noidung" name="NoiDung" style="width:62%;margin-left:162px;" />
+                    <div id="tb_binhluan" style="margin: 10px;color: #ef5f21;"></div>
+                    <br />
+                    <input type="submit" id="btn_binhluan" value="Bình Luận" style="margin-left:50px;margin-left: 50px;font-size: 15px;border-radius: 15px;" />
+                }
+                    
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+<div class=" bottom-product">
+    @foreach (var itemlq in listSPLQ.Take(3))
+    {
+        <div class="col-md-4 bottom-cd simpleCart_shelfItem">
+            <div class="product-at ">
+                <a href="#">
+                    <img class="img-responsive" src="@Url.Content("~/Content/HinhanhSP/" + itemlq.HinhAnh)" alt="" style="width:200px; height:200px">
+                    <div class="pro-grid">
+                    </div>
+                </a>
+            </div>
+            <p class="tun">@itemlq.TenSP</p>
+            @Ajax.ActionLink(String.Format("{0:0,0 VNĐ}", itemlq.DonGia), "ThemGioHangAjax", "GioHang", new { @masp = itemlq.MaSP, @url = Request.Url.ToString() }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "divgiohang", InsertionMode = InsertionMode.Replace }, new {@style = ("text-decoration:none; cursor:pointer; color:white; background:#ef5f21; font - size:20px; padding:5px; ") })
+        </div>
+    }
+    <div class="clearfix"> </div>
+</div>
+</div>
+<script>
+    $("#btn_binhluan").click(function () {
+        
+        var binhluan = $("#txt_noidung").val();
+        if (binhluan == "") {
+            $("#tb_binhluan").text("Cần nhập từ khóa bình luận !!!");
+            return false;
+        }
+        return true;
+    });
+</script>

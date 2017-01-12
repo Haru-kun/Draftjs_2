@@ -1,0 +1,19 @@
+﻿@using BanhangMVC.Models
+@{ 
+    IEnumerable<BinhLuan> listDTM = (IEnumerable<BinhLuan>)ViewBag.LISTBL;
+}
+    @foreach (var item in listDTM)
+    {
+        <div class="top-comment-right" style="margin-left: 65px;">
+            <h6><a href="#">@item.ThanhVien.HoTen</a> - September 3, 2014</h6>
+            <ul class="star-footer">
+                <li><a href="#"><i> </i></a></li>
+                <li><a href="#"><i> </i></a></li>
+                <li><a href="#"><i> </i></a></li>
+                <li><a href="#"><i> </i></a></li>
+                <li><a href="#"><i> </i></a></li>
+            </ul>
+            <p>@item.NoiDung</p>
+        </div>
+      <hr style="width:70%;color:black;border: solid 1px #ef5f21;" />
+    }

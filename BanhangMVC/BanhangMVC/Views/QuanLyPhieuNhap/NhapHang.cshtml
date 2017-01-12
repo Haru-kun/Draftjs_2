@@ -1,0 +1,173 @@
+﻿@using BanhangMVC.Models
+@model PhieuNhap
+@{
+    ViewBag.Title = "NhapHang";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+    IEnumerable<SanPham> listSanpham = ViewBag.ListSanPham as IEnumerable<SanPham>;
+}
+
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+
+<script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+</script>
+<style>
+    #btnNhaphang{
+        border-radius: 3px;
+        width: 30%;
+        font-size: 20px;
+        margin-left: 350px;
+        margin-top: 20px;
+    }
+    #btnAdd{
+        width: 60%;
+        margin-left: 200px;
+        border-radius: 3px;
+        font-size: 15px;
+    }
+</style>
+<h2>Nhập Hàng Mới</h2>
+@using (Html.BeginForm("NhapHang","QuanLyPhieuNhap",FormMethod.Post))
+{ 
+    <table style="width:100%">
+        <tr style="text-align: center;">
+            <td class="control-label">Nhà Cung Cấp</td>
+            <td>Ngày Nhập</td>
+        </tr>
+        <tr style="text-align: center;">
+            <td>@Html.DropDownList("MaNCC", null, new { @class = "form-control",@name="MaNCC", @style = "width: 80%; margin-left: 50px;" })</td>
+            <td><input name="NgayNhap" class="form-control" style="width: 45%; margin-left: 190px;text-align: center;" id="datepicker" /></td>
+        </tr>
+    </table>
+    <br /><br />
+    <hr style="border:1px solid black;width:100%" />
+    <div class="table-responsive">
+        <table class="table tbChitietnhap">
+            <tr class="trAppend" style="display:none;">
+                <td style="width:36%">
+                    <select class="ddlSanPham form-control" name="" >
+                        @foreach(var item in listSanpham)
+                        {
+                            <option value="@item.MaSP">@item.TenSP</option>
+                        }
+                    </select>
+                </td>
+                <td>
+                    <input name="" class="txtDongia form-control" value="0" />
+                </td>
+                <td>
+                    <input name="" class="txtSoluong form-control" value="0" />
+                </td>
+                <td>
+                    <input name="" class="btnXoa btn btn-danger" value="x" type="button" />
+                </td>
+            </tr>
+            <tr class="trFirstChild" data-id="-1">
+                <th>Tên sản phẩm</th>
+                <th>Đơn giá nhập</th>
+                <th>Số lượng</th>
+                <th></th>
+            </tr>
+        </table>
+    </div>
+    <input type="button" class="btn-success" id="btnAdd" value="+" />
+    <br />
+    <input type="submit" class="btn-primary" id="btnNhaphang" value="Nhập hàng" />
+}
+<script>
+    $("#btnAdd").click(function () {
+        //var noidung = "<tr><td>Cot 1</td><td>Cot 2</td><td>Cot 3</td><td>Cot 4</td></tr>"
+        //$(".tbChitietnhap").append(noidung);
+
+        //B4
+        var id_cuoi = $(".tbChitietnhap").find("tr:last-child").attr("data-id");
+        i = parseInt(id_cuoi) + 1;
+
+        //B1 lấy nội dung trong thẻ tr trAppend
+        var tdnoidung = $(".trAppend").html();
+        //B2 tạo 1 thẻ tr để bao nội dung vừa lấy
+        var trnoidung = "<tr class=\"trAppended\" data-id=\"" +i+ "\">" + tdnoidung + "</tr>";
+        //B3 tien hanh them vao table
+        $(".tbChitietnhap").append(trnoidung);
+        LoadIdThe();
+    });
+
+    // duyet mang gan gia tri vao list
+    function LoadIdThe() {
+        $(".trAppended").each(function () {
+            var id = $(this).attr("data-id");
+            var MaSanPham = "[" + id + "].MaSP";
+            var SoLuongNhap = "[" + id + "].SoLuongNhap";
+            var DonGiaNhap = "[" + id + "].DonGiaNhap";
+
+            $(this).find(".ddlSanPham").prop("name", MaSanPham); //gán giá trị prop= property
+            $(this).find(".txtDongia").prop("name", DonGiaNhap);
+            $(this).find(".txtSoluong").prop("name", SoLuongNhap);
+        })
+    };
+    
+    function updateId() {
+        var id_cuoi = $(".tbChitietnhap").find(".trFirstChild").attr("data-id");
+        i = parseInt(id_cuoi) + 1;
+
+        $(".trAppended").each(function () {
+            var id = i;
+            var MaSanPham = "[" + id + "].MaSP";
+            var SoLuongNhap = "[" + id + "].SoLuongNhap";
+            var DonGiaNhap = "[" + id + "].DonGiaNhap";
+            $(this).attr("data-id", i);
+            $(this).find(".ddlSanPham").prop("name", MaSanPham); //gán giá trị prop= property
+            $(this).find(".txtDongia").prop("name", DonGiaNhap);
+            $(this).find(".txtSoluong").prop("name", SoLuongNhap);
+            i++;
+        })
+    };
+
+    // xóa dòng nhập
+    $("body").delegate(".btnXoa", "click", function () {
+        $(this).closest(".trAppended").remove();
+        updateId();
+    });
+    //$(".btnXoa").click(function () {
+    //    //xoa dong nhap
+
+    //    //$(this).parent().parent().remove();
+
+    //    $(this).closest(".trAppend").remove();
+    //});
+
+
+    $("#btnNhaphang").click(function () {
+        if (dongia_kiemtragiatri() == false || soluong_kiemtragiatri()==false) {
+            return false;
+        }
+    });
+    function dongia_kiemtragiatri() {
+        var value=true;
+        $(".txtDongia").each(function () {
+            var giatri = $(this).val();
+            if (isNaN(giatri) == true || giatri<0) {
+                alert("Đơn giá nhập không hợp lệ !!!");
+                value = false;
+            }
+        });
+        return value;
+    }
+    function soluong_kiemtragiatri() {
+        var value = true;
+        $(".txtSoluong").each(function () {
+            var giatri = $(this).val();
+            if (isNaN(giatri) == true || giatri<0) {
+                alert("Số lượng nhập không hợp lệ !!!");
+                value = false;
+            }
+        });
+        return value;
+    }
+</script>
