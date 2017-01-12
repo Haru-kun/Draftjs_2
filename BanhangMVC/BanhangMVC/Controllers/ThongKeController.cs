@@ -14,7 +14,7 @@ namespace BanhangMVC.Controllers
 
         public ActionResult ThongKeWeb()
         {
-            decimal tkdoanhthu =(decimal) db.ChiTietDonDatHangs.Sum(x => x.SoLuong * x.DonGia).Value;
+            decimal tkdoanhthu = (decimal)db.ChiTietDonDatHangs.Sum(x => x.SoLuong * x.DonGia).Value;
 
             ViewBag.SoNguoiTruyCap = (int)HttpContext.Application["SoNguoiTruyCap"];
             ViewBag.SoNguoiDangTruyCap = (int)HttpContext.Application["SoNguoiDangTruyCap"];
@@ -27,7 +27,7 @@ namespace BanhangMVC.Controllers
         {
             if (disposing)
             {
-                if(db != null)
+                if (db != null)
                 {
                     db.Dispose();
                 }
@@ -35,18 +35,5 @@ namespace BanhangMVC.Controllers
             }
             base.Dispose(disposing);
         }
-	 protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if(db != null)
-                {
-                    db.Dispose();
-                }
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-    
     }
 }
