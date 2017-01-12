@@ -1,0 +1,124 @@
+﻿@using PagedList.Mvc
+@using BanhangMVC.Models
+
+
+@*@model IEnumerable<SanPham>*@
+@model PagedList.IPagedList<SanPham>
+@{
+    ViewBag.Title = "TimKiemTheoten";
+    Layout = "~/Views/Layout/ProductLayout.cshtml";
+}
+
+<script>
+
+    function xemtheo() {
+        var x = document.getElementById('xemtheo').value;
+        $.ajax({
+            url: '@Url.Action("XemTheo", "TimKiem")',
+            type: "POST",
+            data: { Loai :x}
+            }).success(function (result) {
+                //alert(x);
+            $('#timkiemajax').html(result);
+            });
+    }
+
+</script>
+
+
+<div style="margin-bottom:30px">
+    @*Tim kiem ajax*@
+    <div style="float:left;">
+        @using (Ajax.BeginForm("TimKiemPartial", "TimKiem", new AjaxOptions { UpdateTargetId = "timkiemajax", InsertionMode = InsertionMode.Replace }))
+        {
+            <input type="text" class="txt_timkiem" value="" name="tukhoa" placeholder=" Tên sản phẩm bất kỳ..." style="border-radius:5px;width:570px;" />
+            <input type="submit" value="Tim kiem" style="padding:1px;" />
+        }
+    </div>
+
+    <div>
+        <select id="xemtheo" onchange="xemtheo()" style="border-radius: 5px;">
+            <option value="1">San Pham Moi Nhat</option>
+            <option value="2">Gia Giam Dan</option>
+            <option value="3">Gia Tang Dan</option>
+        </select>
+    </div>
+</div>
+
+
+
+<script>
+
+    @*function loctimkiem() {
+        //var vitri = document.getElementById("xemtheo").selectedIndex;
+        //var chude = document.getElementById("xemtheo").options;
+        var result='@Ajax.ActionLink("TimKiemPartial", "TimKiem",new {@tukhoa="laptop" }, new AjaxOptions { UpdateTargetId = "timkiemajax", InsertionMode = InsertionMode.Replace }))';
+        return result;
+    }*@
+
+    @*$("#xemtheo").change(function () {
+        var title = $("#xemtheo").val();
+        var result = '@Url.Action("TimKiemPartial", "TimKiem", new { @tukhoa = "laptop"})';
+        $("#timkiemajax").attr("href", result);
+    });*@
+
+</script>
+
+    <div id="timkiemajax">
+           <div class="col-md-9 product1">
+            <div class="bottom-product">
+                @foreach (var item in Model.OrderBy(x => x.DonGia))
+                {
+                    <div class="col-md-4 bottom-cd simpleCart_shelfItem">
+                        <div class="product-at ">
+                            <a href="@Url.Action("ChitietSanpham","Sanpham",new {@id=item.MaSP,@tensp=item.TenSP})">
+                                <img class="img-responsive" src="@Url.Content("~/Content/HinhanhSP/" + item.HinhAnh)" alt="" style="width:200px; height:200px; padding:20px;">
+                                <div class="pro-grid">
+                                    <span class="buy-in">Xem Chi tiết</span>
+                                </div>
+                            </a>
+                        </div>
+                        <p class="tun">@item.TenSP</p>
+
+                        <div id="item_add_ajax">
+                            <i> </i>@Ajax.ActionLink(String.Format("{0:0,0 vnđ}", item.DonGia), "ThemGioHangAjax", "GioHang", new { @masp = item.MaSP, @url = Request.Url.ToString() }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "divgiohang", InsertionMode = InsertionMode.Replace }, new { @style = ("text-decoration: none;cursor: pointer;color: white;") })
+                        </div>
+                    </div>
+                    }
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+        <div class="dlink">
+            @*Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount*@
+            @Html.PagedListPager(Model, page => Url.Action("TimKiemTheoten", new { @page = page, @tukhoa = ViewBag.TK }))
+        </div>
+</div>
+
+<div class="popup_login">
+    <div class="login-form">
+        <div style="width:100%;"><div id="btn_close" style="width: 20px;float: right" class="btn-danger">X</div></div>
+        <h2>Đăng Nhập</h2>
+        <div class="form-info">
+            @using (Ajax.BeginForm("XulyDangnhap", "DangNhap", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "thongbao" }))
+            {
+                <input type="text" name="user" id="user" class="email" placeholder="Tên tài khoản" required="" />
+                <input type="password" name="pass" id="pass" class="password" placeholder="Mật khẩu" required="" />
+                <h3 id="thongbao" style="color:orangered;margin-top:10px;"></h3>
+                <p><a href="#">Quên mật khẩu?</a></p>
+                <ul class="login-buttons">
+                    <li><input type="submit" id="btn_login" value="LOGIN" /></li>
+                    <li><a href="#" class="hvr-sweep-to-left">Đăng Ký</a></li>
+                </ul>
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+    $("#xem_truoc").click(function () {
+        $(".popup_login").slideDown();
+    });
+    $("#btn_close").click(function () {
+        $(".popup_login").slideUp();
+    });
+</script>

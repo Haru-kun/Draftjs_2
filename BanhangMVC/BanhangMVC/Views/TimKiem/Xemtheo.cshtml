@@ -1,0 +1,80 @@
+﻿
+@using BanhangMVC.Models
+@model IEnumerable<SanPham>
+
+@{
+    int dem = 0;
+    int soluongsanpham_macdinh = 9;
+    int trang = 1;
+
+}
+
+
+<div class="col-md-9 product1">
+    <div class="bottom-product">
+        @foreach (var item in Model)
+        {
+            if (dem % soluongsanpham_macdinh == 0 && dem != 0)
+            {
+                trang++;
+            }
+            <div class="@Url.Content("col-md-4 bottom-cd simpleCart_shelfItem Trang"+trang.ToString())">
+                <div class="product-at ">
+                    <a href="@Url.Action("ChitietSanpham","Sanpham",new {@id=item.MaSP,@tensp=item.TenSP})">
+                        <img class="img-responsive" src="@Url.Content("~/Content/HinhanhSP/" + item.HinhAnh)" alt="" style="width:200px; height:200px; padding:10px;">
+                        <div class="pro-grid">
+                            <span class="buy-in">Đặt Mua</span>
+                        </div>
+                    </a>
+                </div>
+                <p class="tun">@item.TenSP</p>
+
+                <div id="item_add_ajax">
+                    <i> </i>@Ajax.ActionLink(String.Format("{0:0,0 vnđ}", item.DonGia), "ThemGioHangAjax", "GioHang", new { @masp = item.MaSP, @url = Request.Url.ToString() }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "divgiohang", InsertionMode = InsertionMode.Replace }, new { @style = ("text-decoration: none;cursor: pointer;color: white;") })
+                </div>
+            </div>
+            dem++;
+        }
+        <div class="clearfix"> </div>
+    </div>
+    <div class="dlink">
+        <div class="pagination-container">
+
+            <ul class="pagination" style="margin-left:2px;">
+                @for (int i = 1; i < trang; i++)
+                {
+                    <li class="">
+                        <a class="linktrang active" data-sotrang="@Url.Content("Trang"+i)" href="#">@i</a>
+                    </li>
+
+                }
+            </ul>
+
+        </div>
+    </div>
+</div>
+
+@* hiện thị sản phẩm theo trang, sảng phảm không cùng trang sẽ bị ẩn*@
+<style>
+    .simpleCart_shelfItem {
+        display: none;
+    }
+
+    .Trang1 {
+        display: block;
+    }
+</style>
+
+@* hiển thị sản phảm khi chọn trang khác*@
+<script>
+    $('.linktrang').click(function () {
+        $('.simpleCart_shelfItem').hide();
+        //lay so trang tu the a linktrang
+        var sotrang = $(this).attr("data-sotrang");
+
+        //hien thi san pham trong trang tuong ung
+
+        $("." + sotrang).show();
+        //alert(sotrang);
+    });
+</script>

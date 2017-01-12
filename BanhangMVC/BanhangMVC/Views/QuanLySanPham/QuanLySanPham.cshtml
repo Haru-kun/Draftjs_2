@@ -1,0 +1,48 @@
+﻿@using BanhangMVC.Models
+@model IEnumerable<SanPham>
+
+
+@{
+    ViewBag.Title = "QuanLySanPham";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+
+    WebGrid grid = new WebGrid(source: Model, rowsPerPage: 5);
+}
+
+@grid.GetHtml(
+    tableStyle: "gridTable",
+    headerStyle: "gridHead",
+    footerStyle: "gridFooter",  
+    rowStyle: "grilRow",
+    columns: grid.Columns(
+        grid.Column("MaSP","MSP"),
+        grid.Column("TenSP","Tên sản phẩm"),
+        grid.Column("CauHinh","Cấu Hình"),
+        //grid.Column("MoTa", "Mô Tả",format:p => @Html.Raw(p.MoTa)),
+        grid.Column("HinhAnh","Hình ảnh sản phẩm",format: p =>@Html.Raw("<img class=\"imgs\"  src=\"../Content/HinhanhSP/" + p.HinhAnh + "\">")),
+        grid.Column(format: x=> @Html.ActionLink("Chỉnh sửa","ChinhSua",new { @id = x.MaSP})),
+        grid.Column(format: x=> Html.ActionLink("Xóa","Xoa",new { @id = x.MaSP}))
+        )
+    )
+<style>
+    .imgs{
+        width:200px;
+        height:200px;
+        padding:5px;
+    }
+    .gridTable{
+        border:2px solid #1c445f;
+    }
+    .gridHead th{
+        padding:5px;
+        text-align:center;
+        background:#eaff00;
+        border:2px solid #1c445f
+    }
+    .gridTable tr td{
+        padding:5px;
+        text-align:center;
+  
+        border:2px solid #1c445f
+    }
+</style>
